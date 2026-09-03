@@ -185,9 +185,9 @@ section{padding:62px 0}
 
 /* hero typed phrases */
 .typed-wrap{margin-top:6px;min-height:1.2em;font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4.8vw,3.5rem);line-height:1.05;letter-spacing:-.01em}
-.typed-wrap .typed{color:var(--muted);font-weight:400}
-.typed-wrap .typed b{color:var(--teal);font-weight:600}
-.typed-cursor{display:inline-block;width:2px;height:1em;background:var(--amber);margin-left:4px;vertical-align:middle;animation:cursorBlink 1s step-start infinite}
+.typed-wrap .typed{color:var(--muted);font-weight:400;transition:opacity .25s var(--ease)}
+.typed-wrap .typed b{color:var(--teal);font-weight:600;text-shadow:0 0 18px rgba(95,212,196,0.22)}
+.typed-cursor{display:inline-block;width:2px;height:1em;background:var(--amber);margin-left:4px;vertical-align:middle;animation:cursorBlink 1s step-start infinite;box-shadow:0 0 8px rgba(232,179,75,0.6)}
 @keyframes cursorBlink{50%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.typed-cursor{animation:none}}
 
@@ -747,8 +747,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     var phrases=[
       'that <b>see, think &amp; move.</b>',
       'from <b>idea to reality.</b>',
-      'autonomous systems that <b>think and work on its own.</b>',
-      'where <b>software meets hardware.</b>'
+      'autonomous systems that <b>think and work on their own.</b>',
+      'where <b>firmware meets fabrication.</b>',
+      'that <b>fly, navigate &amp; endure.</b>',
+      'from <b>schematic to shipped.</b>',
+      'built to <b>survive the field.</b>'
     ];
     var pIdx=0, cIdx=0, deleting=false;
     function tick(){
@@ -768,13 +771,12 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       }
       // if we are in middle of a tag, include its closing
       el.innerHTML=html;
-      var typeSpeed= deleting ? 32 : 72;
-      var hold= deleting ? 600 : 1600;
+      var typeSpeed= deleting ? 30 : 58;
+      var hold= deleting ? 500 : 1300 + plain.length*20;
       if(!deleting && cIdx===plain.length){ deleting=true; setTimeout(tick,hold); return; }
-      if(deleting && cIdx===0){ deleting=false; pIdx=(pIdx+1)%phrases.length; setTimeout(tick,400); return; }
+      if(deleting && cIdx===0){ deleting=false; pIdx=(pIdx+1)%phrases.length; setTimeout(tick,380); return; }
       cIdx+= deleting ? -1 : 1;
-      // slight variance
-      setTimeout(tick, typeSpeed + Math.random()*28);
+      setTimeout(tick, typeSpeed + Math.random()*22);
     }
     tick();
   })();
