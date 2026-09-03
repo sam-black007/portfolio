@@ -199,11 +199,25 @@ section{padding:62px 0}
   margin-bottom:10px;display:block}
 .about-copy b{color:var(--teal)}
 .spec{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;
-  font-family:var(--font-mono);font-size:.8rem;color:var(--muted);overflow:hidden}
+  font-family:var(--font-mono);font-size:.8rem;color:var(--muted);overflow:hidden;display:flex;flex-direction:column;min-height:300px;cursor:text}
 .spec .L{color:var(--faint)}
 .spec .V{color:var(--teal)}
 .spec .A{color:var(--blue)}
-.spec .line{padding:2px 0;white-space:pre-wrap}
+.spec .line{padding:2px 0;white-space:pre-wrap;word-break:break-word}
+.term-history{flex:1;overflow-y:auto;max-height:320px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.term-history::-webkit-scrollbar{width:6px}
+.term-history::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.term-hint{font-size:.66rem;color:var(--faint);letter-spacing:.06em;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.term-out{margin:4px 0;line-height:1.6}
+.term-out .cmd{color:var(--amber)}
+.term-out .ok{color:var(--teal)}
+.term-out .mut{color:var(--faint)}
+.term-out .err{color:var(--red)}
+.term-out b{color:var(--teal);font-weight:400}
+.term-input-row{display:flex;align-items:center;gap:8px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.term-prompt{color:var(--amber);white-space:nowrap;user-select:none}
+.term-input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font-mono);font-size:.8rem;caret-color:var(--teal)}
+.term-input::placeholder{color:var(--faint)}
 
 /* experience */
 .exp-list{border-left:2px solid var(--line);margin-left:6px;padding-left:30px;display:flex;flex-direction:column;gap:28px}
@@ -458,7 +472,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <p>Beyond code, I do the hands-on work too — <b>structural design, electronics, calibration, assembly and manufacturing</b>. I think in control loops, sensor fusion and real-time constraints, and I care that systems behave predictably in the field.</p>
         <p>Currently building UAV flight-control firmware at <b>Skylume Visions</b>, and always prototyping the next physical system.</p>
       </div>
-      <div class="spec reveal" id="term" aria-hidden="true"></div>
+      <div class="spec reveal" id="term" role="region" aria-label="Interactive terminal — type help">
+        <div class="term-hint">robot-lab terminal — type <span style="color:var(--amber)">help</span> + Enter &nbsp;·&nbsp; ↑↓ history &nbsp;·&nbsp; tab autocomplete</div>
+        <div class="term-history" id="termHistory"></div>
+        <label class="term-input-row" for="termInput"><span class="term-prompt">sam@robot-lab:~$</span><input id="termInput" class="term-input" type="text" autocomplete="off" spellcheck="false" placeholder="type help…" aria-label="Terminal input"></label>
+      </div>
     </div>
   </div>
 </section>
@@ -765,25 +783,69 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     document.getElementById('m-bat').textContent=(92+Math.floor(Math.random()*7))+'%';
   },1400);
 
-  /* ---- About terminal ---- */
-  var term=document.getElementById('term');
-  var lines=[
-    {L:'user:',V:'sam@robot-lab'},
-    {L:'>',V:' '},
-    {L:'cwd ',V:'~/embedded/uav-control'},
-    {L:'kernel',V:'STM32H7 · FreeRTOS'},
-    {L:'robotics',V:'ROS2 · inverse kinematics'},
-    {L:'fabrication',V:'CAD · 3D print · assembly'},
-    {L:'status',V:'busy building <span class="A">autonomous things</span>'}
-  ];
-  var html='',li=0;
-  function typeLine(){
-    if(li>=lines.length)return;
-    var L=lines[li];
-    html+='<div class="line">'+(L.L?'<span class="L">'+L.L+'</span>':'')+(L.V?'<span class="V">'+L.V+'</span>':'')+'</div>';
-    term.innerHTML=html;li++;setTimeout(typeLine,150);
-  }
-  typeLine();
+  /* ---- Interactive terminal (space 2) ---- */
+  (function(){
+    var histEl=document.getElementById('termHistory');
+    var input=document.getElementById('termInput');
+    var termBox=document.getElementById('term');
+    if(!histEl||!input) return;
+    var history=[]; var hIdx=-1;
+    var commands={
+      help:'<span class="mut">Available commands — type any and hit Enter:</span><br>'+
+           '<span class="cmd">help</span>        — show this help<br>'+
+           '<span class="cmd">whoami</span>      — who I am<br>'+
+           '<span class="cmd">about</span>       — bio<br>'+
+           '<span class="cmd">skills</span>      — skill matrix<br>'+
+           '<span class="cmd">experience</span>  — work history<br>'+
+           '<span class="cmd">builds</span>      — hardware builds<br>'+
+           '<span class="cmd">projects</span>    — featured GitHub projects<br>'+
+           '<span class="cmd">education</span>   — education<br>'+
+           '<span class="cmd">contact</span>     — how to reach me<br>'+
+           '<span class="cmd">clear</span>       — clear the terminal',
+      whoami:'<b>Sam Joseph Thimothy</b> — <span class="ok">Autonomous Systems &amp; Robotics Engineer</span><br>Chennai, India · <span class="mut">Bridging software intelligence and physical machines.</span>',
+      about:'I love the moment software becomes something you can hold.<br>UAVs / drones · quadruped robots · embedded firmware · sensor systems · ML pipelines.<br>Beyond code: structural design, electronics, calibration, assembly &amp; manufacturing.<br>Control loops, sensor fusion, real-time constraints — systems that behave in the field.<br>Currently: <span class="ok">R&amp;D Engineer — UAV Systems @ Skylume Visions</span> (KITE H7 / STM32H7).',
+      skills:'<span class="mut">Embedded &amp; Firmware:</span> C/C++ 92% · STM32 85% · ESP32 88% · Arduino 95% · FreeRTOS 78% · CAN-FD 76%<br>'+
+             '<span class="mut">Robotics &amp; AI:</span> ROS2 80% · Python 90% · IK 76% · Sensor Fusion 80% · Scikit-learn 78% · Docker 72%<br>'+
+             '<span class="mut">Manufacturing:</span> CAD 82% · 3D Printing 88% · CNC/Machining 70% · Fabrication 84% · Circuit Design 80% · Soldering/PCB 86%',
+      experience:'<span class="ok">R&amp;D Engineer — UAV Systems</span> @ Skylume Visions (May 2026–Present)<br><span class="mut">KITE H7 firmware, dual-IMU fusion, CAN-FD, autonomous navigation — 3 production drone platforms.</span><br>'+
+                '<span class="ok">R&amp;D Intern</span> @ Symbionic Pvt Ltd (May–Aug 2026)<br><span class="mut">ESP32/RPi test rigs, IMU/ultrasonic/motor drivers, patent &amp; IP docs.</span><br>'+
+                '<span class="ok">ML Intern</span> @ Edu-versity (Jan–Mar 2026)<br><span class="mut">ML pipelines, Scikit-learn, student-performance prediction, dashboards.</span>',
+      builds:'<span class="ok">Zuko — 12-DOF Robo Dog</span> <span class="mut">(ROS2 Humble / Docker / Pi, IK gait, IMU balance)</span><br>'+
+             '<span class="ok">Smart Agri-Rover</span> <span class="mut">— autonomous farm rover, built from scratch</span><br>'+
+             '<span class="ok">Smart Voltage Monitor</span> <span class="mut">— ESP32 + web dashboard + auto over/under-voltage protection</span><br>'+
+             '<span class="ok">Dual-Axis Solar Tracker</span> <span class="mut">— ESP32 dual-axis tracking + dashboard</span><br>'+
+             '<span class="ok">Smart Helmet (ESP32)</span> <span class="mut">— MQ-3 + GPS + SMS, prevents ignition</span>',
+      projects:'Featured: <span class="ok">smart-helmet-esp32</span> · <span class="ok">zuko-robo-dog</span> · <span class="ok">smart-agri-rover</span> · <span class="ok">smart-voltage-monitor</span> · <span class="ok">dual-axis-solar-tracker</span><br><span class="mut">Full grid below in § Projects — also try: </span><a href="#projects" style="color:var(--amber);text-decoration:underline">jump to projects ↓</a>',
+      education:'<span class="mut">[Pending resume.pdf]</span> — drop your resume to populate this.<br>Tip: once added, this will show degree / university / year. For now see LinkedIn / CV.',
+      contact:'Email: <a href="mailto:samjosephwb@gmail.com" style="color:var(--amber);text-decoration:underline">samjosephwb@gmail.com</a><br>GitHub: <a href="https://github.com/sam-black007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">github.com/sam-black007</a><br>LinkedIn: <a href="https://linkedin.com/in/sam-josephtimothyh007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">linkedin.com/in/sam-josephtimothyh007</a><br>Location: Chennai, Tamil Nadu, India'
+    };
+    var cmdList=Object.keys(commands);
+    function print(html){ var d=document.createElement('div'); d.className='term-out'; d.innerHTML=html; histEl.appendChild(d); histEl.scrollTop=histEl.scrollHeight; }
+    function echo(cmd){ print('<span class="mut">sam@robot-lab:~$</span> <span class="cmd">'+cmd+'</span>'); }
+    function run(raw){
+      var cmd=raw.trim().toLowerCase(); if(!cmd) return;
+      echo(cmd);
+      if(cmd==='clear'){ histEl.innerHTML=''; return; }
+      if(cmd==='help'){ print(commands.help); return; }
+      if(commands[cmd]){ print(commands[cmd]); return; }
+      // try partial match
+      var hit=cmdList.find(function(k){return k.indexOf(cmd)===0 || cmd.indexOf(k)===0});
+      if(hit && commands[hit]){ print(commands[hit]); return; }
+      print('<span class="err">command not found:</span> '+cmd+'<br><span class="mut">Type </span><span class="cmd">help</span><span class="mut"> for available commands.</span>');
+    }
+    // boot banner
+    print('<span class="mut">sam@robot-lab</span> <span class="ok">robot-lab</span> · <span class="mut">type</span> <span class="cmd">help</span> <span class="mut">to explore</span>');
+    print('<span class="mut">cwd</span> <span class="ok">~/embedded/uav-control</span> &nbsp; <span class="mut">kernel</span> <span class="ok">STM32H7 · FreeRTOS</span>');
+
+    input.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){ var v=input.value; if(v) history.push(v); hIdx=history.length; run(v); input.value=''; }
+      else if(e.key==='ArrowUp'){ if(history.length){ hIdx=Math.max(0,hIdx-1); input.value=history[hIdx]||''; setTimeout(function(){input.selectionStart=input.value.length;},0);} e.preventDefault(); }
+      else if(e.key==='ArrowDown'){ if(history.length){ hIdx=Math.min(history.length,hIdx+1); input.value=history[hIdx]||'';} e.preventDefault(); }
+      else if(e.key==='Tab'){ var cur=input.value.trim().toLowerCase(); if(cur){ var m=cmdList.filter(function(c){return c.indexOf(cur)===0}); if(m.length===1){input.value=m[0]; e.preventDefault();} else if(m.length>1){ print('<span class="mut">'+m.join(' · ')+'</span>'); e.preventDefault();}} else { print('<span class="mut">'+cmdList.join(' · ')+'</span>'); e.preventDefault();} }
+    });
+    termBox.addEventListener('click',function(){ input.focus(); });
+    // alias: clicking help hint focuses
+  })();
 
   /* ---- Skill bars + counters on scroll ---- */
   var trigRun=false;
