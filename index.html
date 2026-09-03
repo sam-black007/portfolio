@@ -289,19 +289,54 @@ section{padding:62px 0}
 .exp-bullets li{position:relative;color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:6px;padding-left:14px}
 .exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--amber);font-weight:700}
 
-/* skills */
-.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.domain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:28px}
-.skill-group h3{font-family:var(--font-display);font-size:1.02rem;margin-bottom:16px;
-  display:flex;align-items:center;gap:10px}
-.skill-group h3::before{content:'';width:14px;height:3px;background:var(--amber);border-radius:2px}
-
-.skill{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.skill .lb{width:170px;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
-.skill .bar{flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden}
-.skill .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));
-  width:0;transition:width 1.2s var(--ease);border-radius:3px}
-.skill .pc{width:34px;text-align:right;font-family:var(--font-mono);font-size:.68rem;color:var(--faint)}
+/* skills — interactive engineering core */
+.skills-intro{font-size:.96rem;color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:28px}
+.eng-core-wrap{display:flex;justify-content:center;align-items:center;padding:20px 0 10px;min-height:560px}
+.eng-core{position:relative;width:560px;height:560px;flex-shrink:0}
+.eng-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.eng-line{stroke:rgba(180,200,230,0.18);stroke-width:1;fill:none;transition:stroke .3s,opacity .3s}
+.eng-line.active{stroke:var(--teal);stroke-width:1.4;opacity:1;filter:drop-shadow(0 0 6px rgba(95,212,196,0.5))}
+.eng-core.dimmed .eng-line{opacity:.18}
+.eng-particle{fill:var(--teal);filter:drop-shadow(0 0 4px var(--teal));opacity:.92}
+.eng-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:148px;height:148px;border-radius:50%;background:radial-gradient(120% 120% at 30% 30%,#1a2a4a 0%,var(--panel) 55%,var(--bg-2) 100%);border:1px solid rgba(95,212,196,0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;z-index:2;box-shadow:0 0 0 1px rgba(95,212,196,0.08),0 0 40px rgba(95,212,196,0.12),inset 0 1px 0 rgba(255,255,255,0.06);text-align:center}
+.eng-center span{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;color:var(--teal);line-height:1.2}
+.eng-center span:first-child{font-size:.62rem;letter-spacing:.22em;color:var(--faint)}
+.eng-center strong{font-family:var(--font-display);font-size:.95rem;font-weight:600;letter-spacing:.06em;color:var(--text);line-height:1.1}
+.eng-node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:136px;max-width:164px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.05em;line-height:1.35;color:var(--muted);text-align:center;cursor:pointer;transition:.28s var(--ease);z-index:2;backdrop-filter:blur(6px);box-shadow:0 4px 18px rgba(0,0,0,0.25)}
+.eng-node:hover{border-color:rgba(95,212,196,0.35);color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,0.35),0 0 18px rgba(95,212,196,0.08)}
+.eng-node.active{border-color:var(--teal);color:var(--teal);background:rgba(95,212,196,0.07);box-shadow:0 0 0 1px rgba(95,212,196,0.2),0 10px 30px rgba(0,0,0,0.4),0 0 22px rgba(95,212,196,0.18)}
+.eng-core.dimmed .eng-node{opacity:.42}
+.eng-core.dimmed .eng-node.active{opacity:1}
+.eng-detail{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 18px;position:relative;overflow:hidden;animation:engIn .42s var(--ease)}
+@keyframes engIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.eng-detail[hidden]{display:none !important}
+.eng-detail-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.eng-detail-head h3{font-family:var(--font-display);font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.eng-detail-head p{font-family:var(--font-mono);font-size:.66rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase}
+.eng-detail-close{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--faint);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;font-size:1.1rem;line-height:1}
+.eng-detail-close:hover{border-color:var(--amber);color:var(--amber)}
+.eng-skill{padding:10px 0;border-bottom:1px solid rgba(180,200,230,0.07);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.eng-skill:last-child{border-bottom:none}
+.eng-skill-name{font-family:var(--font-mono);font-size:.74rem;color:var(--muted)}
+.eng-skill-meta{display:flex;align-items:center;gap:10px}
+.eng-dots{display:flex;gap:4px}
+.eng-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.12);transition:background .6s var(--ease),transform .6s var(--ease);transform:scale(0.86)}
+.eng-dots i.on{background:var(--teal);box-shadow:0 0 6px rgba(95,212,196,0.45);transform:scale(1)}
+.eng-level{font-family:var(--font-mono);font-size:.62rem;color:var(--faint);min-width:98px;text-align:right;letter-spacing:.04em}
+.sia-head{margin-top:56px}
+.sia-intro{font-size:.96rem;color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:26px}
+.sia-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sia-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;transition:.25s var(--ease);position:relative;overflow:hidden}
+.sia-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:.25s}
+.sia-card:hover{transform:translateY(-3px);border-color:rgba(95,212,196,0.35);box-shadow:0 16px 40px rgba(0,0,0,0.35)}
+.sia-card:hover::after{opacity:1}
+.sia-card.highlight{border-color:var(--teal);box-shadow:0 0 0 1px rgba(95,212,196,0.18),0 16px 40px rgba(0,0,0,0.35)}
+.sia-card.dimmed{opacity:.38}
+.sia-card h3{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:6px}
+.sia-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:14px;flex:1}
+.sia-tags{display:flex;flex-wrap:wrap;gap:6px}
+.sia-tag{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);border:1px solid var(--line);padding:4px 8px;border-radius:999px;cursor:pointer;transition:.2s;background:rgba(255,255,255,0.02)}
+.sia-tag:hover,.sia-tag.active{border-color:var(--teal);color:var(--teal);background:rgba(95,212,196,0.08)}
 
 /* education */
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -413,13 +448,22 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 @media(max-width:980px){
   .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr 1fr}
-  .skill-cols{grid-template-columns:1fr 1fr}
-  .domain-grid{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:1fr 1fr}
   .t-status{display:none}
+  .eng-core{width:520px;height:520px}
+  .sia-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .eng-core-wrap{min-height:auto;padding:10px 0}
+  .eng-core{width:100%;height:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:12px 0}
+  .eng-center{position:relative;left:auto;top:auto;transform:none;width:132px;height:132px;margin:0 auto}
+  .eng-node{position:relative;left:auto;top:auto;transform:none !important;max-width:100%;width:100%}
+  .eng-node:hover,.eng-node.active{transform:none !important}
+  .eng-lines{display:none}
+  .eng-detail{margin-top:14px}
 }
 @media(max-width:620px){
-  .projects-grid,.skill-cols,.domain-grid,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
+  .projects-grid,.sia-grid,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
   .wrap,.telemetry-inner,.foot{padding-left:18px;padding-right:18px}
   .t-brand .tag{display:none}
   .mode-row{flex-wrap:wrap}
@@ -578,120 +622,78 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   </div>
 </section>
 
-<!-- Skills -->
+<!-- Skills — interactive engineering core -->
 <section id="skills">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index">02</span><h2 class="sec-title">Skill Matrix</h2><div class="sec-line"></div>
-      <span class="sec-meta">COMPETENCE</span>
+      <span class="sec-index">02</span><h2 class="sec-title">SKILLS</h2><div class="sec-line"></div>
+      <span class="sec-meta">01 / SKILLS</span>
     </div>
-    <div class="skill-cols">
-      <div class="skill-group reveal">
-        <h3>Programming &amp; Firmware</h3>
-        <div class="skill"><span class="lb">C / C++ / Embedded C</span><div class="bar"><i data-w="92"></i></div><span class="pc">92%</span></div>
-        <div class="skill"><span class="lb">Python</span><div class="bar"><i data-w="90"></i></div><span class="pc">90%</span></div>
-        <div class="skill"><span class="lb">STM32 · STM32H7</span><div class="bar"><i data-w="85"></i></div><span class="pc">85%</span></div>
-        <div class="skill"><span class="lb">ESP32 / Arduino</span><div class="bar"><i data-w="88"></i></div><span class="pc">88%</span></div>
-        <div class="skill"><span class="lb">FreeRTOS · RTOS</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">CAN-FD · I2C · SPI · UART</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
-        <div class="skill"><span class="lb">Bootloader · Low-Power</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Unit Testing · Toolchain</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Git · Linux · VS Code</span><div class="bar"><i data-w="84"></i></div><span class="pc">84%</span></div>
-      </div>
-      <div class="skill-group reveal">
-        <h3>Robotics · AI · UAV</h3>
-        <div class="skill"><span class="lb">ROS (Basic) · Docker</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Kinematics &amp; Dynamics</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">Sensor Fusion · SLAM</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
-        <div class="skill"><span class="lb">OpenCV · Image Proc.</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">Scikit-learn · Pandas</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">PX4 · ArduPilot · GCS</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Kalman Filter · PID</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">Local AI · Edge Inference</span><div class="bar"><i data-w="68"></i></div><span class="pc">68%</span></div>
-        <div class="skill"><span class="lb">UAV Flight · Mission Plan</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-      </div>
-      <div class="skill-group reveal">
-        <h3>CAD · Manufacturing</h3>
-        <div class="skill"><span class="lb">Fusion 360 · SolidWorks</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
-        <div class="skill"><span class="lb">Autodesk Inventor · GD&amp;T</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">FDM · Resin 3D Printing</span><div class="bar"><i data-w="88"></i></div><span class="pc">88%</span></div>
-        <div class="skill"><span class="lb">CNC · VMC · Laser Cut</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">DFM · Assembly · Finishing</span><div class="bar"><i data-w="84"></i></div><span class="pc">84%</span></div>
-        <div class="skill"><span class="lb">FEA · CFD (SimScale)</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Sheet Metal · Injection Mold</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Tolerance · Material Select</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">KiCad · Proteus · MATLAB</span><div class="bar"><i data-w="68"></i></div><span class="pc">68%</span></div>
+    <p class="skills-intro reveal">Tools and technologies I use to design, build, test and automate robotic systems.</p>
+
+    <div class="eng-core-wrap reveal" id="engCoreWrap">
+      <div class="eng-core" id="engCore">
+        <svg class="eng-lines" viewBox="0 0 560 560" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="eng-center" aria-hidden="true">
+          <span>ENGINEERING</span>
+          <strong>CORE</strong>
+        </div>
+        <button class="eng-node" data-domain="robotics" aria-expanded="false" aria-controls="engDetail">ROBOTICS</button>
+        <button class="eng-node" data-domain="embedded" aria-expanded="false" aria-controls="engDetail">EMBEDDED<br>SYSTEMS</button>
+        <button class="eng-node" data-domain="ai" aria-expanded="false" aria-controls="engDetail">AI / MACHINE<br>LEARNING</button>
+        <button class="eng-node" data-domain="cad" aria-expanded="false" aria-controls="engDetail">CAD &amp; DIGITAL<br>FABRICATION</button>
+        <button class="eng-node" data-domain="uav" aria-expanded="false" aria-controls="engDetail">UAV / DRONES</button>
+        <button class="eng-node" data-domain="mfg" aria-expanded="false" aria-controls="engDetail">MANUFACTURING &amp;<br>PROTOTYPING</button>
       </div>
     </div>
-    <div class="domain-grid reveal">
-      <div class="skill-group">
-        <h3>Drones</h3>
-        <div class="skill"><span class="lb">UAV Flight · Mission Plan</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">Telemetry · Real-time Ctrl</span><div class="bar"><i data-w="75"></i></div><span class="pc">75%</span></div>
-        <div class="skill"><span class="lb">Multi-rotor Platforms</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
+
+    <div class="eng-detail" id="engDetail" hidden role="region" aria-live="polite">
+      <div class="eng-detail-head">
+        <div>
+          <h3 id="engDetailTitle"></h3>
+          <p id="engDetailSub"></p>
+        </div>
+        <button class="eng-detail-close" id="engDetailClose" aria-label="Close details">×</button>
       </div>
-      <div class="skill-group">
-        <h3>Rover</h3>
-        <div class="skill"><span class="lb">Mobile Robots</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
-        <div class="skill"><span class="lb">Navigation · Path Planning</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">12-DOF Quadruped</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
+      <div id="engDetailSkills"></div>
+    </div>
+
+    <div class="sia-head sec-head reveal" style="margin-top:56px">
+      <span class="sec-index">02</span><h2 class="sec-title">HOW I USE MY SKILLS</h2><div class="sec-line"></div>
+      <span class="sec-meta">02 / SKILLS IN ACTION</span>
+    </div>
+    <p class="sia-intro reveal">Bringing together the right tools and technologies to build real projects.</p>
+
+    <div class="sia-grid reveal" id="siaGrid">
+      <div class="sia-card" data-tags="Raspberry Pi,Robotics,Embedded Systems,Control Systems,Sensor Integration">
+        <h3>Rex – Robotic Dog</h3>
+        <p>Raspberry Pi quadruped for real-time locomotion, gait control and sensor-driven balance.</p>
+        <div class="sia-tags"><span class="sia-tag">Raspberry Pi</span><span class="sia-tag">Robotics</span><span class="sia-tag">Embedded Systems</span><span class="sia-tag">Control Systems</span><span class="sia-tag">Sensor Integration</span></div>
       </div>
-      <div class="skill-group">
-        <h3>Manufacturing</h3>
-        <div class="skill"><span class="lb">FDM · Resin 3D Printing</span><div class="bar"><i data-w="88"></i></div><span class="pc">88%</span></div>
-        <div class="skill"><span class="lb">CNC · VMC · Laser Cut</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">Sheet Metal · DFM</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
+      <div class="sia-card" data-tags="Raspberry Pi,Robotics,GPS,Sensors,Control Systems,Autonomous Systems">
+        <h3>Autonomous Precision Agriculture Rover</h3>
+        <p>Raspberry Pi-powered rover for precision farming — autonomous navigation and field-task automation.</p>
+        <div class="sia-tags"><span class="sia-tag">Raspberry Pi</span><span class="sia-tag">Robotics</span><span class="sia-tag">GPS</span><span class="sia-tag">Sensors</span><span class="sia-tag">Control Systems</span><span class="sia-tag">Autonomous Systems</span></div>
       </div>
-      <div class="skill-group">
-        <h3>Machine Operation</h3>
-        <div class="skill"><span class="lb">VMC Setup</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">CNC Operation</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">GD&amp;T · Assembly</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
+      <div class="sia-card" data-tags="EMG,Embedded Systems,Signal Processing,Control Systems,Robotics,CAD">
+        <h3>EMG-Controlled Assistive Robotic Arm</h3>
+        <p>EMG-driven assistive arm with real-time signal processing and adaptive grasping.</p>
+        <div class="sia-tags"><span class="sia-tag">EMG</span><span class="sia-tag">Embedded Systems</span><span class="sia-tag">Signal Processing</span><span class="sia-tag">Control Systems</span><span class="sia-tag">Robotics</span><span class="sia-tag">CAD</span></div>
       </div>
-      <div class="skill-group">
-        <h3>IoT</h3>
-        <div class="skill"><span class="lb">MQTT / HTTP</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
-        <div class="skill"><span class="lb">IMU · GPS · Ultrasonic · IR</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
-        <div class="skill"><span class="lb">ESP32 · STM32</span><div class="bar"><i data-w="86"></i></div><span class="pc">86%</span></div>
+      <div class="sia-card" data-tags="ESP32,IoT,Sensors,Embedded Systems,MQTT,HTTP,Web Dashboard">
+        <h3>IoT-Based Autonomous Solar Tracking System</h3>
+        <p>Dual-axis solar tracker with ESP32, real-time sensing, telemetry and web dashboard.</p>
+        <div class="sia-tags"><span class="sia-tag">ESP32</span><span class="sia-tag">IoT</span><span class="sia-tag">Sensors</span><span class="sia-tag">Embedded Systems</span><span class="sia-tag">MQTT / HTTP</span><span class="sia-tag">Web Dashboard</span></div>
       </div>
-      <div class="skill-group">
-        <h3>Testing &amp; Tools</h3>
-        <div class="skill"><span class="lb">NumPy · Proteus</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">Git · Linux · VS Code</span><div class="bar"><i data-w="84"></i></div><span class="pc">84%</span></div>
-        <div class="skill"><span class="lb">Rapid Prototyping</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
-        <div class="skill"><span class="lb">PlatformIO · ESPClaw</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">BOM · Vendor Sourcing</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
+      <div class="sia-card" data-tags="Python,Machine Learning,scikit-learn,OCR,Streamlit,Data Analysis">
+        <h3>Diabetes Risk Intelligence</h3>
+        <p>ML system for diabetes risk prediction with OCR, data pipelines and Streamlit.</p>
+        <div class="sia-tags"><span class="sia-tag">Python</span><span class="sia-tag">Machine Learning</span><span class="sia-tag">scikit-learn</span><span class="sia-tag">OCR</span><span class="sia-tag">Streamlit</span><span class="sia-tag">Data Analysis</span></div>
       </div>
-      <div class="skill-group">
-        <h3>Computer Vision</h3>
-        <div class="skill"><span class="lb">OpenCV · Image Processing</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">Face &amp; Attention Tracking</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Screen Activity Analysis</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Edge / Local AI Inference</span><div class="bar"><i data-w="68"></i></div><span class="pc">68%</span></div>
-      </div>
-      <div class="skill-group">
-        <h3>Electronics &amp; Circuit</h3>
-        <div class="skill"><span class="lb">PCB Design (KiCad)</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Circuit Simulation</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">Power Electronics · Voltage Reg</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Signal Conditioning</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Soldering · PCB Assembly</span><div class="bar"><i data-w="84"></i></div><span class="pc">84%</span></div>
-      </div>
-      <div class="skill-group">
-        <h3>Control &amp; Signal Proc.</h3>
-        <div class="skill"><span class="lb">PID · Feedback Control</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
-        <div class="skill"><span class="lb">Kalman Filter · DSP</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">State Estimation</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Transfer Functions · Stability</span><div class="bar"><i data-w="66"></i></div><span class="pc">66%</span></div>
-        <div class="skill"><span class="lb">Motor &amp; Servo Control</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
-      </div>
-      <div class="skill-group">
-        <h3>Simulation</h3>
-        <div class="skill"><span class="lb">Generative Design</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
-        <div class="skill"><span class="lb">CFD Simulation</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
-        <div class="skill"><span class="lb">Stress-Strain Simulation</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
-        <div class="skill"><span class="lb">Gazebo Simulator</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
-        <div class="skill"><span class="lb">Isaac Sim</span><div class="bar"><i data-w="66"></i></div><span class="pc">66%</span></div>
+      <div class="sia-card" data-tags="CAD,3D Printing,Servo Control,Mechanical Design,Robotics">
+        <h3>Modular Multi-DOF Robotic Manipulator</h3>
+        <p>CAD-designed, 3D-printed manipulator with servo actuation for precise object handling.</p>
+        <div class="sia-tags"><span class="sia-tag">CAD</span><span class="sia-tag">3D Printing</span><span class="sia-tag">Servo Control</span><span class="sia-tag">Mechanical Design</span><span class="sia-tag">Robotics</span></div>
       </div>
     </div>
   </div>
@@ -1221,7 +1223,210 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   form.addEventListener('submit',function(){showToast('Transmitting…');});
 
   loadRepos();
-})();
-</script>
+})();</script>
+
+<script>
+// ---- Interactive Engineering Core (Skills) ----
+(function(){
+  var levelLabels={1:'Learning',2:'Familiar',3:'Working Knowledge',4:'Comfortable',5:'Applied'};
+  var skillData={
+    robotics:{title:'ROBOTICS',sub:'Motion · Perception · Control',skills:[
+      {n:'Mobile Robotics',l:5},{n:'Robotic Manipulators',l:4},{n:'Kinematics & Dynamics',l:4},{n:'Path Planning',l:3},{n:'Sensor Fusion',l:5},{n:'SLAM',l:3},{n:'Control Systems',l:4},{n:'ROS',l:2}
+    ]},
+    embedded:{title:'EMBEDDED SYSTEMS',sub:'Firmware · Interfacing · Sensing',skills:[
+      {n:'ESP32',l:5},{n:'Arduino',l:5},{n:'Raspberry Pi',l:4},{n:'Embedded C',l:5},{n:'Peripheral Interfacing',l:4},{n:'Sensor Integration',l:5},{n:'IMU',l:4},{n:'GPS',l:3},{n:'Ultrasonic',l:4},{n:'IR Sensors',l:4},{n:'Actuator Control',l:4},{n:'MQTT',l:3},{n:'HTTP',l:3}
+    ]},
+    ai:{title:'AI / MACHINE LEARNING',sub:'Perception · Data · Inference',skills:[
+      {n:'Python',l:5},{n:'Machine Learning',l:3},{n:'OpenCV',l:4},{n:'Computer Vision',l:4},{n:'Image Processing',l:4},{n:'Data Analysis',l:3},{n:'NumPy',l:4},{n:'Pandas',l:3},{n:'scikit-learn',l:3}
+    ]},
+    cad:{title:'CAD & DIGITAL FABRICATION',sub:'Design · Assembly · Drawings',skills:[
+      {n:'Fusion 360',l:5},{n:'SolidWorks',l:4},{n:'Autodesk Inventor',l:3},{n:'3D Modeling',l:5},{n:'Assembly Design',l:4},{n:'Engineering Drawings',l:3},{n:'GD&T',l:3},{n:'Design for Manufacturing',l:4},{n:'3D Printing',l:5}
+    ]},
+    uav:{title:'UAV / DRONES',sub:'Piloting · Systems · Safety',skills:[
+      {n:'Drone Piloting',l:4},{n:'Quadcopter Operations',l:4},{n:'UAV Flight Handling',l:3},{n:'Basic UAV Systems',l:3},{n:'Pre-flight Checks',l:4},{n:'Mission Planning',l:3},{n:'Flight Safety',l:3},{n:'Payload Handling',l:2}
+    ]},
+    mfg:{title:'MANUFACTURING & PROTOTYPING',sub:'Fabrication · Assembly · Finish',skills:[
+      {n:'FDM 3D Printing',l:5},{n:'Resin 3D Printing',l:4},{n:'CNC Machining',l:3},{n:'VMC Operation',l:3},{n:'Laser Cutting',l:4},{n:'Sheet Metal Basics',l:2},{n:'Prototype Fabrication',l:5},{n:'Mechanical Assembly',l:4},{n:'Finishing & Post-Processing',l:3},{n:'Digital Fabrication',l:4}
+    ]}
+  };
+  var domainTagMap={
+    robotics:['Robotics','Control Systems','Sensor Integration','ROS','Mobile Robotics','Kinematics'],
+    embedded:['ESP32','Embedded Systems','Sensor Integration','IMU','GPS','MQTT','HTTP','Actuator'],
+    ai:['Python','Machine Learning','OpenCV','Computer Vision','Data Analysis','scikit-learn','NumPy','Pandas'],
+    cad:['CAD','Fusion 360','SolidWorks','3D Printing','Assembly Design','GD&T','Mechanical Design','Servo Control'],
+    uav:['Drone','UAV','Quadcopter','Mission Planning','Flight Safety','Payload','Flight Handling'],
+    mfg:['3D Printing','CNC','VMC','Laser Cutting','Sheet Metal','Manufacturing','Prototyping','Fabrication','Mechanical','Finishing']
+  };
+  var core=document.getElementById('engCore');
+  var wrap=document.getElementById('engCoreWrap');
+  var detail=document.getElementById('engDetail');
+  var dTitle=document.getElementById('engDetailTitle');
+  var dSub=document.getElementById('engDetailSub');
+  var dSkills=document.getElementById('engDetailSkills');
+  var closeBtn=document.getElementById('engDetailClose');
+  var svg=core?core.querySelector('.eng-lines'):null;
+  if(!core||!svg||!detail) return;
+  var nodes=[].slice.call(core.querySelectorAll('.eng-node'));
+  var angles=[-90,-30,30,90,150,210];
+  var prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function layout(){
+    var isMobile=window.innerWidth<=720;
+    svg.innerHTML='';
+    if(isMobile) return;
+    var R=195,cx=280,cy=280;
+    nodes.forEach(function(n,i){
+      var a=angles[i]*Math.PI/180;
+      var x=cx+Math.cos(a)*R, y=cy+Math.sin(a)*R;
+      n.style.left=x+'px'; n.style.top=y+'px'; n.style.transform='translate(-50%,-50%)';
+      var line=document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',cx); line.setAttribute('y1',cy);
+      line.setAttribute('x2',x); line.setAttribute('y2',y);
+      line.setAttribute('class','eng-line');
+      line.setAttribute('data-domain',n.dataset.domain);
+      svg.appendChild(line);
+      var p=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      p.setAttribute('r','3.2'); p.setAttribute('class','eng-particle');
+      p.setAttribute('data-domain',n.dataset.domain);
+      svg.appendChild(p);
+      if(!prefersReduced){
+        (function(p,x1,y1,x2,y2,idx){
+          var dur=2200+idx*340, off=idx*420, start=null;
+          function step(ts){
+            if(document.hidden){ requestAnimationFrame(step); return; }
+            if(!prefersReduced && start==null) start=ts+off;
+            if(prefersReduced) return;
+            var t=((ts-start)%dur)/dur;
+            var x=x1+(x2-x1)*t, y=y1+(y2-y1)*t;
+            var op=t<0.08?t/0.08:t>0.92?(1-t)/0.08:1;
+            p.setAttribute('cx',x); p.setAttribute('cy',y); p.setAttribute('opacity',op*0.92);
+            requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        })(p,cx,cy,x,y,i);
+      } else {
+        p.setAttribute('cx',cx); p.setAttribute('cy',cy); p.setAttribute('opacity','0.6');
+      }
+    });
+    // draw lines
+    if(!prefersReduced){
+      svg.querySelectorAll('.eng-line').forEach(function(l,i){
+        var len=Math.hypot(l.x2.baseVal.value-l.x1.baseVal.value,l.y2.baseVal.value-l.y1.baseVal.value);
+        l.style.strokeDasharray=len; l.style.strokeDashoffset=len;
+        setTimeout(function(){ l.style.transition='stroke-dashoffset 900ms var(--ease)'; l.style.strokeDashoffset='0'; },200+i*90);
+      });
+    }
+  }
+  function renderDetail(domain){
+    var d=skillData[domain]; if(!d) return;
+    dTitle.textContent=d.title;
+    dSub.textContent=d.sub;
+    dSkills.innerHTML=d.skills.map(function(s){
+      var dots=[1,2,3,4,5].map(function(k){ return '<i'+(k<=s.l?' class="on"':'')+'></i>'; }).join('');
+      return '<div class="eng-skill"><span class="eng-skill-name">'+s.n+'</span><div class="eng-skill-meta"><div class="eng-dots">'+dots+'</div><span class="eng-level">'+levelLabels[s.l]+'</span></div></div>';
+    }).join('');
+    detail.hidden=false;
+    detail.scrollIntoView({behavior: prefersReduced?'auto':'smooth', block:'nearest'});
+    if(!prefersReduced){
+      var rows=[].slice.call(dSkills.querySelectorAll('.eng-skill'));
+      rows.forEach(function(row, ri){
+        var dots=[].slice.call(row.querySelectorAll('.eng-dots i'));
+        dots.forEach(function(dot, di){
+          if(dot.classList.contains('on')){
+            dot.style.transform='scale(0.6)'; dot.style.opacity='0';
+            setTimeout(function(){ dot.style.transition='transform .42s var(--ease), opacity .42s var(--ease)'; dot.style.transform='scale(1)'; dot.style.opacity='1'; }, 120+ri*40+di*45);
+          }
+        });
+      });
+    }
+  }
+  function highlightSiaForDomain(domain){
+    var tags=domainTagMap[domain]||[];
+    var cards=[].slice.call(document.querySelectorAll('.sia-card'));
+    cards.forEach(function(c){
+      var ct=(c.dataset.tags||'').toLowerCase();
+      var hit=tags.some(function(t){ return ct.indexOf(t.toLowerCase())>-1; });
+      c.classList.toggle('highlight',hit);
+      c.classList.toggle('dimmed',!hit);
+      c.querySelectorAll('.sia-tag').forEach(function(t){
+        var tl=t.textContent.trim().toLowerCase();
+        var th=tags.some(function(x){ return tl.indexOf(x.toLowerCase())>-1 || x.toLowerCase().indexOf(tl)>-1; });
+        t.classList.toggle('active',hit&&th);
+      });
+    });
+  }
+  function clearSiaHighlight(){
+    document.querySelectorAll('.sia-card').forEach(function(c){ c.classList.remove('highlight','dimmed'); });
+    document.querySelectorAll('.sia-tag').forEach(function(t){ t.classList.remove('active'); });
+  }
+  function setActive(domain){
+    nodes.forEach(function(n){ n.classList.toggle('active', n.dataset.domain===domain); n.setAttribute('aria-expanded', n.dataset.domain===domain?'true':'false'); });
+    core.classList.add('dimmed');
+    svg.querySelectorAll('.eng-line').forEach(function(l){ l.classList.toggle('active', l.dataset.domain===domain); });
+    svg.querySelectorAll('.eng-particle').forEach(function(p){ p.style.opacity = p.dataset.domain===domain?'0.92':'0.18'; });
+    highlightSiaForDomain(domain);
+  }
+  function clearActive(){
+    nodes.forEach(function(n){ n.classList.remove('active'); n.setAttribute('aria-expanded','false'); });
+    core.classList.remove('dimmed');
+    svg.querySelectorAll('.eng-line').forEach(function(l){ l.classList.remove('active'); });
+    svg.querySelectorAll('.eng-particle').forEach(function(p){ p.style.opacity='0.92'; });
+    clearSiaHighlight();
+  }
+  nodes.forEach(function(n){
+    n.addEventListener('click', function(){
+      var d=this.dataset.domain;
+      var wasActive=this.classList.contains('active');
+      if(wasActive){ detail.hidden=true; clearActive(); return; }
+      setActive(d);
+      renderDetail(d);
+    });
+  });
+  if(closeBtn) closeBtn.addEventListener('click', function(){ detail.hidden=true; clearActive(); });
+  // SIA tag hover
+  var siaGrid=document.getElementById('siaGrid');
+  if(siaGrid){
+    siaGrid.addEventListener('mouseover', function(e){
+      var t=e.target.closest('.sia-tag'); if(!t) return;
+      var tag=t.textContent.trim().toLowerCase();
+      document.querySelectorAll('.sia-card').forEach(function(c){
+        var ct=(c.dataset.tags||'').toLowerCase();
+        var has=ct.split(',').some(function(x){ var a=x.trim(); return a===tag || a.indexOf(tag)>-1 || tag.indexOf(a)>-1; });
+        c.classList.toggle('highlight',has); c.classList.toggle('dimmed',!has);
+      });
+      document.querySelectorAll('.sia-tag').forEach(function(x){
+        x.classList.toggle('active', x.textContent.trim().toLowerCase()===tag);
+      });
+      // also highlight related domain nodes
+      var hitDomain=null;
+      Object.keys(domainTagMap).forEach(function(dom){
+        if(domainTagMap[dom].some(function(th){ return th.toLowerCase()===tag || th.toLowerCase().indexOf(tag)>-1 || tag.indexOf(th.toLowerCase())>-1; })) hitDomain=dom;
+      });
+      if(hitDomain){
+        nodes.forEach(function(n){ n.classList.toggle('active', n.dataset.domain===hitDomain); });
+        svg.querySelectorAll('.eng-line').forEach(function(l){ l.classList.toggle('active', l.dataset.domain===hitDomain); });
+      }
+    });
+    siaGrid.addEventListener('mouseleave', function(){ clearSiaHighlight(); clearActive(); if(!detail.hidden){ var a=document.querySelector('.eng-node.active'); if(a) setActive(a.dataset.domain); } });
+  }
+  // initial layout + on resize
+  layout();
+  var ro=new ResizeObserver(function(){ layout(); if(detail.hidden) return; var a=document.querySelector('.eng-node.active'); if(a) setActive(a.dataset.domain); });
+  try{ ro.observe(document.body); }catch(e){}
+  window.addEventListener('resize', layout);
+  // reveal animation for core
+  if('IntersectionObserver' in window && !prefersReduced){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(ent){
+        if(ent.isIntersecting){
+          ent.target.classList.add('in');
+          layout();
+          io.unobserve(ent.target);
+        }
+      });
+    },{threshold:0.2});
+    var cw=document.getElementById('engCoreWrap');
+    if(cw) io.observe(cw);
+  }
+})();</script>
 </body>
 </html>
