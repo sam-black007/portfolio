@@ -3,26 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B1220">
 <title>Sam Joseph Thimothy — Autonomous Systems &amp; Robotics Engineer</title>
-<meta name="description" content="Sam Joseph Thimothy builds autonomous systems, UAVs, and intelligent hardware — bridging software intelligence and physical machines. Portfolio, projects and experience.">
-<meta name="keywords" content="Autonomous Systems, Robotics, UAV, Drones, Embedded Systems, STM32, ESP32, ROS2, Python, C++, Manufacturing, Fabrication, Chennai">
+<meta name="description" content="Robotics Engineer building autonomous systems, UAVs and intelligent hardware — embedded firmware, ROS2, CAD & manufacturing. Portfolio, projects and CV.">
+<meta name="keywords" content="Autonomous Systems, Robotics, UAV, Drones, Embedded Systems, STM32, ESP32, ROS2, Python, C++, Manufacturing, Fabrication, Chennai, Sam Joseph Thimothy">
 <meta name="author" content="Sam Joseph Thimothy">
-<link rel="canonical" href="https://samjoseph.vercel.app">
+<meta name="format-detection" content="telephone=no">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://samjoseph.vercel.app">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="generator" content="Sam Joseph Thimothy Portfolio">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Sam Joseph Thimothy">
+<meta property="og:locale" content="en_IN">
 <meta property="og:url" content="https://samjoseph.vercel.app">
 <meta property="og:title" content="Sam Joseph Thimothy — Autonomous Systems & Robotics Engineer">
-<meta property="og:description" content="Bridging software intelligence and physical machines. Drones, UAVs, robotics, embedded systems and manufacturing.">
+<meta property="og:description" content="Bridging software intelligence and physical machines — drones, UAVs, robotics, embedded firmware and manufacturing.">
 <meta property="og:image" content="https://samjoseph.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sam Joseph Thimothy — Autonomous Systems & Robotics Engineer">
-<meta name="twitter:description" content="Bridging software intelligence and physical machines.">
+<meta name="twitter:description" content="Bridging software intelligence and physical machines — drones, UAVs, robotics, embedded firmware and manufacturing.">
 <meta name="twitter:image" content="https://samjoseph.vercel.app/og-image.png">
+
+<!-- Analytics (privacy-friendly; no-op until a real endpoint is configured).
+     Supports Plausible/Umami-compatible script. Toggle via localStorage 'samj-analytics' = 'off'. -->
+<script>
+  window.SITE_ANALYTICS = {
+    src: "",            // e.g. 'https://plausible.io/js/script.js'
+    domain: "samjoseph.vercel.app"
+  };
+  (function(){try{
+    if(!window.SITE_ANALYTICS || !window.SITE_ANALYTICS.src) return;
+    var opt=window.localStorage.getItem('samj-analytics');
+    if(opt==='off') return;
+    var s=document.createElement('script');
+    s.defer=true;s.async=true;
+    s.src=window.SITE_ANALYTICS.src;
+    if(window.SITE_ANALYTICS.domain) s.setAttribute('data-domain',window.SITE_ANALYTICS.domain);
+    document.body.appendChild(s);
+  }catch(e){}})();
+</script>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +76,28 @@
   "sameAs":[
     "https://github.com/sam-black007",
     "https://linkedin.com/in/sam-josephtimothyh007"
+  ],
+  "alumniOf":{
+    "@type":"CollegeOrUniversity",
+    "name":"Sathyabama Institute of Science and Technology"
+  },
+  "knowsAbout":[
+    "Autonomous Systems","Robotics","UAV","Embedded Systems","Firmware","ROS2","CAD","Manufacturing"
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Sam Joseph Thimothy — Portfolio",
+  "url":"https://samjoseph.vercel.app",
+  "description":"Portfolio of Sam Joseph Thimothy — Autonomous Systems & Robotics Engineer.",
+  "publisher":{
+    "@type":"Person",
+    "name":"Sam Joseph Thimothy"
+  },
+  "inLanguage":"en"
 }
 </script>
 
@@ -288,6 +338,9 @@ section{padding:62px 0}
 .skeleton{background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%);
   background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius);height:170px}
 @keyframes shimmer{to{background-position:-200% 0}}
+.load-error{grid-column:1/-1;padding:26px;border:1px dashed var(--line);border-radius:var(--radius);
+  text-align:center;color:var(--faint);font-family:var(--font-mono);font-size:.8rem}
+.load-error .filter-chip{margin-top:12px;cursor:pointer}
 
 /* achievements */
 .ach-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -588,7 +641,9 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       </div>
     </div>
     <div class="proj-label reveal" id="featuredLabel" style="display:none"><b>Featured</b> — hardware builds &amp; systems</div>
-    <div class="projects-grid" id="featuredGrid"></div>
+    <div class="projects-grid" id="featuredGrid">
+      <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    </div>
     <div class="proj-label reveal" id="otherLabel" style="display:none"><b>Other Projects</b> — remaining work</div>
     <div class="projects-grid" id="projectsGrid">
       <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
@@ -972,15 +1027,23 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     }
   }
   async function loadRepos(){
+    var fg=document.getElementById('featuredGrid');
+    var grid=document.getElementById('projectsGrid');
     try{
       var res=await fetch('https://api.github.com/users/'+GITHUB_USER+'/repos?per_page=100&sort=pushed&direction=desc');
+      if(!res.ok)throw new Error('HTTP '+res.status);
       var data=await res.json();
       window._repos=data.filter(function(r){return EXCLUDED.indexOf(r.name)<0;});
       renderGrid();
     }catch(e){
-      document.getElementById('projectsGrid').innerHTML='<p style="color:var(--faint);font-family:var(--font-mono)">→ Could not reach GitHub.</p>';
+      var msg='<div class="load-error"><p>→ Could not reach GitHub.</p>'+
+        '<button class="filter-chip" onclick="window.__loadRepos()">Retry ↻</button></div>';
+      if(fg) fg.innerHTML=''; if(grid) grid.innerHTML=msg;
+      if(document.getElementById('featuredLabel')) document.getElementById('featuredLabel').style.display='none';
+      if(document.getElementById('otherLabel')) document.getElementById('otherLabel').style.display='none';
     }
   }
+  window.__loadRepos=function(){loadRepos();};
 
   /* ---- Modal open/close ---- */
   var overlay=document.getElementById('modalOverlay');
@@ -1006,6 +1069,9 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       document.getElementById('mTags').innerHTML=cs.tags.map(function(t){return '<span class="m-tag">'+t+'</span>';}).join('');
       document.getElementById('mLink').href=cs.link;
       openModal();
+    } else {
+      // Other Projects → redirect directly to GitHub
+      window.open('https://github.com/sam-black007/'+key,'_blank','noopener');
     }
   };
 
