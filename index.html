@@ -372,17 +372,11 @@ section{padding:62px 0}
 .ach p{font-size:.84rem;color:var(--muted);margin-top:4px;line-height:1.6}
 
 /* contact */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-grid{display:grid;gap:40px}
 .contact-copy h3{font-family:var(--font-display);font-size:1.5rem;margin-bottom:12px}
 .contact-copy p{color:var(--muted);font-size:.96rem;margin-bottom:22px;line-height:1.8}
 .contact-loc{display:flex;align-items:center;gap:8px;color:var(--faint);font-family:var(--font-mono);font-size:.8rem;margin-bottom:20px}
 .contact-btns{display:flex;gap:12px;flex-wrap:wrap}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.contact-form input,.contact-form textarea{padding:13px 16px;border-radius:8px;border:1px solid var(--line);
-  background:var(--panel);color:var(--text);font-family:var(--font-display);font-size:.9rem;outline:none;transition:.2s;width:100%}
-.contact-form input:focus,.contact-form textarea:focus{border-color:var(--amber)}
-.contact-form textarea{min-height:120px;resize:vertical}
-.contact-form button{align-self:flex-start}
 
 /* modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(5,9,16,0.82);backdrop-filter:blur(6px);
@@ -414,12 +408,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 .foot a{color:var(--faint);font-family:var(--font-mono);font-size:.7rem;transition:.2s}
 .foot a:hover{color:var(--amber)}
 
-/* toast */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--amber);color:#0B1220;padding:13px 22px;
-  border-radius:8px;font-family:var(--font-mono);font-size:.78rem;z-index:400;opacity:0;
-  transform:translateY(20px);transition:.3s var(--ease);max-width:90%;box-shadow:0 12px 32px rgba(0,0,0,0.35)}
-.toast.show{opacity:1;transform:none}
-
 /* scroll progress */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:500;
   background:linear-gradient(90deg,var(--teal),var(--amber));box-shadow:0 0 12px rgba(95,212,196,0.5)}
@@ -431,15 +419,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 .totop.show{opacity:1;transform:none;pointer-events:auto}
 .totop:hover{border-color:var(--teal);color:var(--amber);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
 
-/* contact success */
-.contact-success{display:none;text-align:center;padding:14px 10px}
-.contact-panel.form-success .contact-form{display:none}
-.contact-panel.form-success .contact-success{display:block}
-.contact-success .cs-title{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--teal);margin-bottom:6px}
-.contact-success .cs-sub{font-size:.9rem;color:var(--muted)}
-.contact-success .cs-icon{width:56px;height:56px;margin:0 auto 14px;border-radius:50%;
-  border:1px solid rgba(95,212,196,0.4);display:grid;place-items:center;color:var(--teal);animation:csPop .5s var(--ease)}
-@keyframes csPop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -768,24 +747,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
           <a href="resume.pdf" class="btn btn-ghost" download="Sam_Joseph_CV.pdf">Download CV</a>
         </div>
       </div>
-      <div class="contact-panel reveal">
-        <form class="contact-form" id="contactForm" action="https://formsubmit.co/samjosephwb@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Portfolio Contact — New Message">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
-          <textarea name="message" placeholder="Tell me about your project…" required></textarea>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
-        <div class="contact-success" id="contactSuccess">
-          <div class="cs-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div class="cs-title">Message sent</div>
-          <div class="cs-sub">Thanks for reaching out — I'll get back to you shortly.</div>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -817,8 +779,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <a class="btn btn-ghost m-btn" id="mLink" href="#" target="_blank" rel="noopener">Open on GitHub</a>
   </div>
 </div>
-
-<div class="toast" id="toast" role="status"></div>
 
 <script>
 (function(){
@@ -1222,23 +1182,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     c.classList.add('active');activeFilter=c.dataset.filter;renderGrid();
   });
   document.getElementById('repoSearch').addEventListener('input',function(e){_search=e.target.value;renderGrid();});
-
-  /* ---- contact toast + success ---- */
-  var form=document.getElementById('contactForm');
-  var toast=document.getElementById('toast');
-  var success=document.getElementById('contactSuccess');
-  var panel=form?form.parentNode:null;
-  function showToast(m){toast.textContent=m;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},3500);}
-  form.addEventListener('submit',function(){
-    if(panel&&panel.classList.contains('form-success')) return;
-    showToast('Transmitting…');
-    if(panel){
-      setTimeout(function(){
-        panel.classList.add('form-success');
-        try{ if(panel.scrollIntoView) panel.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){}
-      },450);
-    }
-  });
 
   /* ---- scroll progress + back to top ---- */
   var progress=document.getElementById('scrollProgress');
