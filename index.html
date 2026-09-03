@@ -292,6 +292,11 @@ section{padding:62px 0}
 .skill-group h3{font-family:var(--font-display);font-size:1.02rem;margin-bottom:16px;
   display:flex;align-items:center;gap:10px}
 .skill-group h3::before{content:'';width:14px;height:3px;background:var(--amber);border-radius:2px}
+.skill-chip{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:5px 10px;border-radius:6px;white-space:nowrap;display:inline-block}
+.domain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.domain-grid .skill-group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.domain-grid .skill-group h3{font-size:.78rem;color:var(--amber);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;display:block}
+.domain-grid .skill-group h3::before{display:none}
 .skill{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .skill .lb{width:128px;font-family:var(--font-mono);font-size:.74rem;color:var(--muted)}
 .skill .bar{flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden}
@@ -410,11 +415,12 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr 1fr}
   .skill-cols{grid-template-columns:1fr 1fr}
+  .domain-grid{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:1fr 1fr}
   .t-status{display:none}
 }
 @media(max-width:620px){
-  .projects-grid,.skill-cols,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
+  .projects-grid,.skill-cols,.domain-grid,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
   .wrap,.telemetry-inner,.foot{padding-left:18px;padding-right:18px}
   .t-brand .tag{display:none}
   .mode-row{flex-wrap:wrap}
@@ -591,16 +597,63 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <div class="skill"><span class="lb">KiCad · Proteus · MATLAB</span><div class="bar"><i data-w="68"></i></div><span class="pc">68%</span></div>
       </div>
     </div>
-    <div class="reveal" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px">
-      <span style="font-family:var(--font-mono);font-size:.66rem;color:var(--faint);width:100%;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Also · IoT Protocols · Testing · Tools · Languages</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">MQTT / HTTP</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">IMU · GPS · Ultrasonic · IR</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">NumPy · Proteus</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">Tamil (Native)</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">English (Advanced C1)</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">French · Hindi (A2)</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">Rapid Prototyping · DFM</span>
-      <span style="font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:6px">Sheet Metal · VMC Setup</span>
+    <div class="domain-grid reveal">
+      <div class="skill-group">
+        <h3>Drones</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">UAV Flight · Mission Planning</span>
+          <span class="skill-chip">Telemetry · Real-time Control</span>
+          <span class="skill-chip">Multi-rotor Platforms</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Rover</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">Mobile Robots</span>
+          <span class="skill-chip">Navigation · Path Planning</span>
+          <span class="skill-chip">12-DOF Quadruped</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Manufacturing</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">FDM · Resin 3D Printing</span>
+          <span class="skill-chip">CNC · VMC · Laser Cut</span>
+          <span class="skill-chip">Sheet Metal · DFM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Machine Operation</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">VMC Setup</span>
+          <span class="skill-chip">CNC Operation</span>
+          <span class="skill-chip">GD&T · Assembly</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>IoT</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">MQTT / HTTP</span>
+          <span class="skill-chip">IMU · GPS · Ultrasonic · IR</span>
+          <span class="skill-chip">ESP32 · STM32</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Testing &amp; Tools</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">NumPy · Proteus</span>
+          <span class="skill-chip">Git · Linux · VS Code</span>
+          <span class="skill-chip">Rapid Prototyping</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span class="skill-chip">Tamil (Native)</span>
+          <span class="skill-chip">English (Advanced C1)</span>
+          <span class="skill-chip">French · Hindi (A2)</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
