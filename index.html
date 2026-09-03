@@ -183,8 +183,16 @@ section{padding:62px 0}
 .section-label{text-align:center;font-family:var(--font-mono);font-size:.7rem;color:var(--faint);letter-spacing:.2em;text-transform:uppercase;margin-bottom:40px}
 .section-label b{color:var(--amber);font-weight:400}
 
+/* hero typed phrases */
+.typed-wrap{margin-top:6px;min-height:1.2em;font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4.8vw,3.5rem);line-height:1.05;letter-spacing:-.01em}
+.typed-wrap .typed{color:var(--muted);font-weight:400}
+.typed-wrap .typed b{color:var(--teal);font-weight:600}
+.typed-cursor{display:inline-block;width:2px;height:1em;background:var(--amber);margin-left:4px;vertical-align:middle;animation:cursorBlink 1s step-start infinite}
+@keyframes cursorBlink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.typed-cursor{animation:none}}
+
 /* stats strip */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:22px 14px;text-align:center;transition:.25s var(--ease)}
 .stat:hover{border-color:rgba(232,179,75,0.35);transform:translateY(-3px)}
@@ -397,7 +405,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <div class="eyebrow">Autonomous Systems &amp; Robotics</div>
     <div class="hero-grid">
       <div class="reveal in">
-        <h1>I build <span class="accent">machines</span><br>that <span class="muted">see, think &amp; move.</span></h1>
+        <h1>I build <span class="accent">machines</span></h1>
+        <div class="typed-wrap" aria-live="polite" aria-label="Rotating tagline"><span id="typedHero" class="typed"></span><span class="typed-cursor" aria-hidden="true"></span></div>
         <div class="hero-role">SAM JOSEPH THIMOTHY</div>
         <p class="hero-sub">Bridging software intelligence and physical machines.</p>
         <p class="hero-summary">From flight-control firmware on STM32 to ROS2 quadruped robots and production-worthy hardware — I design, build, calibrate and manufacture autonomous systems that survive the field.</p>
@@ -439,7 +448,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       <div class="stat"><b data-count="14">0</b><span>Repos Built</span></div>
       <div class="stat"><b data-count="5">0</b><span>Featured Systems</span></div>
       <div class="stat"><b data-count="3">0</b><span>Roles Held</span></div>
-      <div class="stat"><b data-count="1">0</b><span>Autonomous Dogs</span></div>
     </div>
   </div>
 </section>
@@ -731,6 +739,45 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     document.getElementById('r-gait').innerHTML=(1.0+Math.random()*0.5).toFixed(2)+'<small>s</small>';
     document.getElementById('m-bat').textContent=(92+Math.floor(Math.random()*7))+'%';
   },1400);
+
+  /* ---- Hero typed phrases ---- */
+  (function(){
+    var el=document.getElementById('typedHero'); if(!el) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.innerHTML='that <b>see, think &amp; move.</b>'; return; }
+    var phrases=[
+      'that <b>see, think &amp; move.</b>',
+      'from <b>idea to reality.</b>',
+      'autonomous systems that <b>think and work on its own.</b>',
+      'where <b>software meets hardware.</b>'
+    ];
+    var pIdx=0, cIdx=0, deleting=false;
+    function tick(){
+      var full=phrases[pIdx];
+      // strip tags for typing length but render with tags up to cIdx
+      // we type on plain text then inject tags at the end; simpler: type HTML progressively by plain length
+      var plain=full.replace(/<[^>]*>/g,'');
+      var curPlain=plain.slice(0,cIdx);
+      // reconstruct HTML by mapping plain chars back to html: easiest — when not deleting, show html sliced by plain len via temp
+      // build html up to plain len
+      var html=''; var count=0; var inTag=false;
+      for(var i=0;i<full.length && count < curPlain.length;i++){
+        var ch=full[i];
+        if(ch==='<' ) inTag=true;
+        if(inTag){ html+=ch; if(ch==='>') inTag=false; }
+        else { html+=ch; count++; }
+      }
+      // if we are in middle of a tag, include its closing
+      el.innerHTML=html;
+      var typeSpeed= deleting ? 32 : 72;
+      var hold= deleting ? 600 : 1600;
+      if(!deleting && cIdx===plain.length){ deleting=true; setTimeout(tick,hold); return; }
+      if(deleting && cIdx===0){ deleting=false; pIdx=(pIdx+1)%phrases.length; setTimeout(tick,400); return; }
+      cIdx+= deleting ? -1 : 1;
+      // slight variance
+      setTimeout(tick, typeSpeed + Math.random()*28);
+    }
+    tick();
+  })();
 
   /* ---- Interactive terminal (space 2) ---- */
   (function(){
