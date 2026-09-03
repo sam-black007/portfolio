@@ -952,15 +952,28 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   /* ---- Hero typed phrases ---- */
   (function(){
     var el=document.getElementById('typedHero'); if(!el) return;
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.innerHTML='that <b>see, think &amp; move.</b>'; return; }
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent='I build robotic systems that move.'; return; }
     var phrases=[
-      'that <b>see, think &amp; move.</b>',
-      'from <b>idea to reality.</b>',
-      'autonomous systems that <b>think and work on their own.</b>',
-      'where <b>firmware meets fabrication.</b>',
-      'that <b>fly, navigate &amp; endure.</b>',
-      'from <b>schematic to shipped.</b>',
-      'built to <b>survive the field.</b>'
+      'I build robotic systems that move.',
+      'I design robots from concept to prototype.',
+      'I build embedded systems for real machines.',
+      'I connect sensors, actuators, and control.',
+      'I turn CAD designs into physical prototypes.',
+      'I build with Raspberry Pi and ESP32.',
+      'I develop systems that sense and respond.',
+      'I work with robotics and autonomous systems.',
+      'I prototype mechanisms and test their limits.',
+      'I combine software with physical systems.',
+      'I build and test embedded control systems.',
+      'I explore machine learning for real applications.',
+      'I work with computer vision and image processing.',
+      'I design parts for 3D printing and fabrication.',
+      'I build, test, debug, and improve prototypes.',
+      'I work across CAD, electronics, and robotics.',
+      'I experiment with autonomous machines and rovers.',
+      'I build assistive technology through robotics.',
+      'I develop systems from idea to working prototype.',
+      'I’m building my skills through real-world engineering.'
     ];
     var pIdx=0, cIdx=0, deleting=false;
     function tick(){
