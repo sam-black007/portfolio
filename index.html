@@ -1071,12 +1071,19 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   })();
 
   /* ---- Skill bars + counters on scroll ---- */
-  var trigRun=false;
-  function triggers(){
-    if(trigRun)return;trigRun=true;
+  var barsRun=false;
+  function runBars(){
+    if(barsRun)return;barsRun=true;
     document.querySelectorAll('.skill .bar i').forEach(function(el){el.style.width=el.dataset.w+'%';});
+  }
+  var countersRun=false;
+  function runCounters(){
+    if(countersRun)return;countersRun=true;
+    var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.querySelectorAll('[data-count]').forEach(function(el){
-      var t=+el.dataset.count,i=0;
+      var t=+el.dataset.count;
+      if(reduceMotion||!isFinite(t)){el.textContent=t;return;}
+      var i=0;
       var iv=setInterval(function(){i++;el.textContent=Math.min(t,Math.round(t*i/40));if(i>=40){el.textContent=t;clearInterval(iv);}},28);
     });
   }
@@ -1087,8 +1094,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
+  var statTrig=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){runCounters();statTrig.disconnect();}});
+  },{threshold:0.2});
+  var st=document.querySelector('.stats');
+  if(st)statTrig.observe(st);
   var trig=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){triggers();trig.disconnect();}});
+    en.forEach(function(e){if(e.isIntersecting){runBars();trig.disconnect();}});
   },{threshold:0.2});
   var sk=document.querySelector('#skills');
   if(sk)trig.observe(sk);
