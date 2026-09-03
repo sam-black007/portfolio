@@ -286,6 +286,9 @@ section{padding:62px 0}
 .exp .role{font-family:var(--font-display);font-size:1.25rem;font-weight:600;margin-top:3px}
 .exp .org{font-family:var(--font-mono);font-size:.8rem;color:var(--amber);margin-bottom:8px}
 .exp .desc{color:var(--muted);font-size:.92rem;line-height:1.7}
+.exp-bullets{margin:10px 0 0 18px;padding:0;list-style:none}
+.exp-bullets li{position:relative;color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:6px;padding-left:14px}
+.exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--amber);font-weight:700}
 
 /* skills */
 .skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -449,6 +452,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       <a href="#education">Education</a>
       <a href="#projects">Projects</a>
       <a href="#achievements">Achievements</a>
+      <a href="#certifications">Credentials</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="t-status"><span class="blink"></span>ONLINE</div>
@@ -502,7 +506,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   <div class="wrap">
     <div class="stats reveal">
       <div class="stat"><b data-count="14">0</b><span>Repos Built</span></div>
-      <div class="stat"><b data-count="6">0</b><span>Featured Systems</span></div>
+      <div class="stat"><b data-count="10">0</b><span>Featured Systems</span></div>
       <div class="stat"><b data-count="3">0</b><span>Roles Held</span></div>
     </div>
   </div>
@@ -541,18 +545,36 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <div class="role">R&amp;D Engineer — UAV Systems</div>
         <div class="org">Skylume Visions</div>
         <p class="desc">Flight-control firmware for <b>KITE H7 (STM32H7)</b> — dual-IMU sensor fusion, CAN-FD &amp; autonomous navigation. Contributing to <b>3 production drone platforms</b> (defense &amp; commercial) with real-time control loops and reliable long-range telemetry.</p>
+        <ul class="exp-bullets">
+          <li>Designed and iterated flight-control firmware across sensor fusion, navigation, and telemetry layers for production UAV platforms.</li>
+          <li>Built real-time control loops with CAN-FD and dual-IMU integration for reliable autonomous operation.</li>
+          <li>Contributed to three production drone platforms across defense and commercial applications.</li>
+          <li>Worked alongside hardware, software, and flight-ops teams to validate systems from bench to field.</li>
+        </ul>
       </div>
       <div class="exp reveal">
         <div class="when">05/2026 — 07/2026 · 3 MONTHS</div>
         <div class="role">Research &amp; Development Intern</div>
         <div class="org">Symbionic Pvt. Ltd., Chennai</div>
-        <p class="desc">Design &amp; development of <b>robotic &amp; assistive-technology prototypes</b> · In-depth <b>literature &amp; patent reviews</b> · Prototype mechanisms &amp; industrial-design → functional solutions · <b>Tests &amp; evaluations</b> to guide R&amp;D decisions · Cross-functional collaboration from concept &amp; validation to testing &amp; documentation.</p>
+        <p class="desc">Prototyping assistive and robotic hardware from concept to working bench demo.</p>
+        <ul class="exp-bullets">
+          <li>Designing and iterating product prototypes across mechanical, electronic, and firmware layers for assistive-tech use cases.</li>
+          <li>Running structured literature and patent reviews to de-risk new ideas and shape the technical direction of active R&amp;D tracks.</li>
+          <li>Working alongside mechanical, electronics, and software leads to translate rough concepts into functional, testable solutions.</li>
+          <li>Bringing up microcontroller-based test rigs (ESP32 / Raspberry Pi + sensors) to validate design assumptions early.</li>
+        </ul>
       </div>
       <div class="exp reveal">
         <div class="when">01/2026 — 03/2026 · 3 MONTHS</div>
         <div class="role">Machine Learning Intern</div>
         <div class="org">Edu-versity, Chennai</div>
-        <p class="desc">Developed <b>ML models for educational applications</b> · <b>Data preprocessing, feature engineering &amp; exploratory data analysis</b> · Used data-driven insights to identify patterns and support practical application development.</p>
+        <p class="desc">Built and evaluated ML models for education-focused data products.</p>
+        <ul class="exp-bullets">
+          <li>Developed supervised ML models targeting learning-outcome prediction and student-engagement signals.</li>
+          <li>Owned the data pipeline end-to-end: cleaning, feature engineering, train/validation splits, and metric-driven tuning.</li>
+          <li>Ran exploratory data analysis with pandas and visual tooling to surface patterns that informed model design.</li>
+          <li>Documented experiments and model trade-offs so the wider team could reproduce and extend the work.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -692,15 +714,15 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <div class="ach-list">
       <div class="ach reveal">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-        <div><b>Top 4 — Threx Hackathon 2025</b><p>Team event — recognised for autonomous systems prototyping and rapid iteration under hackathon constraints.</p></div>
+        <div><b>Top 4 — Threx Hackathon 2025</b><p>Team event finalist — recognised for autonomous systems prototyping and rapid iteration under hackathon constraints.</p></div>
       </div>
       <div class="ach reveal">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         <div><b>SIH 2025 — Second Round</b><p>Selected for the second round of Smart India Hackathon (SIH) 2025 — national-level innovation challenge.</p></div>
       </div>
       <div class="ach reveal">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <div><b>Literature &amp; Patent Reviews</b><p>Conducted in-depth literature &amp; patent reviews at Symbionic to support R&amp;D initiatives and prototype decisions.</p></div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <div><b>Robotics &amp; Innovation Communities</b><p>Active member and contributor to robotics and innovation communities — sharing knowledge and collaborating on real-world systems.</p></div>
       </div>
       <div class="ach reveal">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
@@ -710,11 +732,31 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   </div>
 </section>
 
+<!-- Certifications -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index">06</span><h2 class="sec-title">Credentials</h2><div class="sec-line"></div>
+      <span class="sec-meta">CERTIFICATIONS</span>
+    </div>
+    <div class="ach-list">
+      <div class="ach reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div><b>Go (Golang) Programming — Basic</b><p>HackerRank · 2025</p></div>
+      </div>
+      <div class="ach reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div><b>Python Basics</b><p>HackerRank · 2025</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index">06</span><h2 class="sec-title">Open a Channel</h2><div class="sec-line"></div>
+      <span class="sec-index">07</span><h2 class="sec-title">Open a Channel</h2><div class="sec-line"></div>
       <span class="sec-meta">CONTACT</span>
     </div>
     <div class="contact-grid">
@@ -723,7 +765,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <p>Robotics, UAV, embedded, or manufacturing — I'm actively looking for my next role and open to collaborations. If you're hiring for autonomous systems or have an interesting problem to solve, let's talk.</p>
         <div class="contact-loc">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Chennai, Tamil Nadu, India
+          Chennai, Tamil Nadu, India — 600080
         </div>
         <div class="contact-loc">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01 0 0.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.81a16 16 0 006.1 6.1l1.17-1.17a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
@@ -834,6 +876,42 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       solution:'A dual-axis solar tracker that continuously re-orients the panel toward the sun on two axes. An ESP32 drives the servo positioning, and a web dashboard shows live orientation and capture data.',
       role:'Firmware, hardware wiring and the web dashboard — implementing servo control logic and the live monitoring interface.',
       results:'The panel tracks the sun across both axes, sustaining a more optimal angle to meaningfully improve energy capture.'
+    },
+    'rider-safety-interlock':{
+      name:'Intelligent Rider Safety & Vehicle Interlock System',cat:'Embedded · Safety',
+      link:'https://github.com/sam-black007',
+      tags:['ESP32','GPS','GSM','MQ-3','Safety'],
+      problem:'Drunk riding and road accidents remain a leading cause of fatalities — existing solutions are reactive, not preventive.',
+      solution:'An ESP32-based safety system integrating alcohol detection (MQ-3), GPS tracking, GSM emergency alerts, and automatic vehicle ignition lock to prevent impaired driving before it starts.',
+      role:'Full-stack embedded design — sensor integration, firmware, GPS/GSM modules, and the interlock control logic.',
+      results:'Real-time alcohol sensing with automatic ignition lock and emergency SMS alerts with GPS coordinates.'
+    },
+    'rex-quadruped':{
+      name:'Rex — Quadruped Robotic Platform',cat:'Robotics · Legged',
+      link:'https://github.com/sam-black007',
+      tags:['Raspberry Pi','Gait','IMU','Locomotion'],
+      problem:'Legged locomotion requires precise real-time coordination of multiple joints, gait patterns, and sensor feedback for stable movement.',
+      solution:'A Raspberry Pi quadruped focused on real-time locomotion, gait control, sensor integration, and embedded orchestration for stable multi-DOF walking.',
+      role:'Platform design, gait algorithm development, IMU integration and real-time embedded control.',
+      results:'Quadruped platform capable of stable multi-DOF locomotion with real-time gait control and sensor feedback.'
+    },
+    'eduversity-ml':{
+      name:'Education ML Models & Analytics',cat:'ML · Data Science',
+      link:'https://github.com/sam-black007',
+      tags:['Python','pandas','scikit-learn','Matplotlib'],
+      problem:'Educational institutions lack data-driven tools to predict learning outcomes and understand student engagement patterns.',
+      solution:'Supervised ML models and EDA pipelines for education data — engagement prediction, feature engineering, and reporting dashboards.',
+      role:'End-to-end data pipeline: cleaning, feature engineering, model training, validation, and documentation.',
+      results:'ML models for learning-outcome prediction with reproducible experiments and documented trade-offs.'
+    },
+    'ai-study-focus-analyzer':{
+      name:'AI Study Focus & Screen Activity Analyzer',cat:'AI · Computer Vision',
+      link:'https://github.com/sam-black007',
+      tags:['Python','OpenCV','Computer Vision','Local AI'],
+      problem:'Students lack objective tools to measure focus and productivity during study sessions — self-reporting is unreliable.',
+      solution:'A local desktop AI system that monitors study focus using webcam-based face tracking and screen content analysis, with real-time focus scoring and daily productivity reports.',
+      role:'Computer vision pipeline, face/attention tracking algorithms, screen activity analysis and local AI inference.',
+      results:'Real-time focus scoring with daily productivity reports — all processed locally for privacy.'
     }
   };
 
@@ -907,6 +985,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
            '<span class="cmd">builds</span>      — hardware builds<br>'+
            '<span class="cmd">projects</span>    — featured GitHub projects<br>'+
            '<span class="cmd">education</span>   — education<br>'+
+           '<span class="cmd">certs</span>       — certifications<br>'+
            '<span class="cmd">contact</span>     — how to reach me<br>'+
            '<span class="cmd">clear</span>       — clear the terminal',
       whoami:'<b>Sam Joseph Thimothy</b> — <span class="ok">Autonomous Systems &amp; Robotics Engineer</span><br>Chennai, India · <span class="mut">Bridging software intelligence and physical machines.</span>',
@@ -923,9 +1002,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
              '<span class="ok">Smart Voltage Monitor</span> <span class="mut">— ESP32 + web dashboard + auto over/under-voltage protection</span><br>'+
              '<span class="ok">Dual-Axis Solar Tracker</span> <span class="mut">— ESP32 dual-axis tracking + dashboard</span><br>'+
              '<span class="ok">Smart Helmet (ESP32)</span> <span class="mut">— MQ-3 + GPS + SMS, prevents ignition</span>',
-      projects:'Featured: <span class="ok">smart-helmet-esp32</span> · <span class="ok">zuko-robo-dog</span> · <span class="ok">multi-dof-manipulator</span> · <span class="ok">smart-agri-rover</span> · <span class="ok">smart-voltage-monitor</span> · <span class="ok">dual-axis-solar-tracker</span><br><span class="mut">Full grid below in § Projects — also try: </span><a href="#projects" style="color:var(--amber);text-decoration:underline">jump to projects ↓</a>',
+      projects:'Featured: <span class="ok">smart-helmet-esp32</span> · <span class="ok">zuko-robo-dog</span> · <span class="ok">multi-dof-manipulator</span> · <span class="ok">smart-agri-rover</span> · <span class="ok">smart-voltage-monitor</span> · <span class="ok">dual-axis-solar-tracker</span> · <span class="ok">rider-safety-interlock</span> · <span class="ok">rex-quadruped</span> · <span class="ok">eduversity-ml</span> · <span class="ok">ai-study-focus-analyzer</span><br><span class="mut">Full grid below in § Projects — also try: </span><a href="#projects" style="color:var(--amber);text-decoration:underline">jump to projects ↓</a>',
       education:'<b>B.E. Computer Science (AI &amp; Robotics)</b> @ <span class="ok">Sathyabama University</span> (02/2024–Current)<br><span class="mut">CGPA 7.74/10 (4th Sem) · AI, Robotics &amp; Embedded Systems · Active Robotics &amp; Innovation Communities</span>',
-      contact:'Email: <a href="mailto:samjosephwb@gmail.com" style="color:var(--amber);text-decoration:underline">samjosephwb@gmail.com</a><br>GitHub: <a href="https://github.com/sam-black007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">github.com/sam-black007</a><br>LinkedIn: <a href="https://linkedin.com/in/sam-josephtimothyh007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">linkedin.com/in/sam-josephtimothyh007</a><br>Location: Chennai, Tamil Nadu, India'
+      certs:'<span class="ok">Go (Golang) Programming — Basic</span> <span class="mut">HackerRank · 2025</span><br>'+
+            '<span class="ok">Python Basics</span> <span class="mut">HackerRank · 2025</span>',
+      contact:'Email: <a href="mailto:samjosephwb@gmail.com" style="color:var(--amber);text-decoration:underline">samjosephwb@gmail.com</a><br>GitHub: <a href="https://github.com/sam-black007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">github.com/sam-black007</a><br>LinkedIn: <a href="https://linkedin.com/in/sam-josephtimothyh007" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:underline">linkedin.com/in/sam-josephtimothyh007</a><br>Phone: +91 80562 73107<br>Location: Chennai, Tamil Nadu, India — 600080'
     };
     var cmdList=Object.keys(commands);
     function print(html){ var d=document.createElement('div'); d.className='term-out'; d.innerHTML=html; histEl.appendChild(d); histEl.scrollTop=histEl.scrollHeight; }
@@ -993,7 +1074,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 
   /* ---- GitHub projects ---- */
   var activeFilter='all',_search='';
-  var flagMap={'smart-helmet-esp32':1,'zuko-robo-dog':1,'multi-dof-manipulator':1,'smart-agri-rover':1,'smart-voltage-monitor':1,'dual-axis-solar-tracker':1};
+  var flagMap={'smart-helmet-esp32':1,'zuko-robo-dog':1,'multi-dof-manipulator':1,'smart-agri-rover':1,'smart-voltage-monitor':1,'dual-axis-solar-tracker':1,'rider-safety-interlock':1,'rex-quadruped':1,'eduversity-ml':1,'ai-study-focus-analyzer':1};
   function cat(r){var d=(r.name+' '+(r.description||'')+' '+(r.language||'')).toLowerCase();
     if(/esp32|stm32|arduino|sensor|helmet|voltage|firmware|cctv/.test(d))return 'embedded';
     if(/rob|arm|manip|soccer|dog|quadruped|dof|tracker|solar|rover/.test(d))return 'robotics';
