@@ -169,6 +169,23 @@ body::after{
 .blink{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.4s step-start infinite}
 @keyframes blink{50%{opacity:.15}}
 
+/* hamburger */
+.t-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;
+  border:1px solid var(--line);border-radius:8px;background:transparent;cursor:pointer;padding:8px;flex-shrink:0}
+.t-hamburger span{display:block;width:100%;height:2px;background:var(--muted);border-radius:2px;
+  transition:.28s var(--ease);transform-origin:center}
+.t-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--amber)}
+.t-hamburger.open span:nth-child(2){opacity:0;transform:scale(0)}
+.t-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--amber)}
+.t-nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;
+  background:rgba(11,18,32,0.96);backdrop-filter:blur(18px);flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;padding:80px 24px 40px}
+.t-nav-mobile.open{display:flex}
+.t-nav-mobile a{font-family:var(--font-mono);font-size:.92rem;letter-spacing:.12em;color:var(--muted);
+  padding:12px 20px;border:1px solid transparent;border-radius:8px;width:100%;max-width:280px;text-align:center;
+  text-transform:uppercase;transition:.2s}
+.t-nav-mobile a:hover{color:var(--amber);border-color:var(--line)}
+
 /* ---------- hero ---------- */
 .hero{padding:64px 0 26px}
 .eyebrow{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.18em;color:var(--amber);
@@ -279,6 +296,10 @@ section{padding:62px 0}
 /* experience */
 .exp-list{border-left:2px solid var(--line);margin-left:6px;padding-left:30px;display:flex;flex-direction:column;gap:28px}
 .exp{position:relative}
+.exp::before{content:'';position:absolute;left:-36px;top:8px;width:12px;height:12px;border-radius:50%;
+  background:var(--panel);border:2px solid var(--teal);z-index:1;transition:.3s var(--ease)}
+.exp.reveal::before{box-shadow:0 0 0 4px rgba(95,212,196,0.15)}
+.exp:hover::before{background:var(--teal);box-shadow:0 0 0 6px rgba(95,212,196,0.25),0 0 14px rgba(95,212,196,0.35)}
 .exp::before{content:'';position:absolute;left:-37px;top:4px;width:12px;height:12px;border-radius:50%;
   background:var(--bg);border:3px solid var(--amber)}
 .exp .when{font-family:var(--font-mono);font-size:.72rem;color:var(--blue);letter-spacing:.06em}
@@ -371,6 +392,23 @@ section{padding:62px 0}
 .ach b{font-family:var(--font-display);font-size:.98rem}
 .ach p{font-size:.84rem;color:var(--muted);margin-top:4px;line-height:1.6}
 
+/* now */
+.now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.now-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  display:flex;gap:14px;transition:.25s var(--ease);position:relative;overflow:hidden}
+.now-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),transparent);opacity:0;transition:.25s}
+.now-card:hover{transform:translateY(-3px);border-color:rgba(232,179,75,0.35);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35)}
+.now-card:hover::after{opacity:1}
+.now-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:5px;
+  box-shadow:0 0 10px rgba(95,212,196,0.4);animation:pulse 2s ease-in-out infinite}
+.now-label{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:6px}
+.now-body p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.now-tags{display:flex;flex-wrap:wrap;gap:6px}
+.now-tags span{font-family:var(--font-mono);font-size:.62rem;color:var(--faint);border:1px solid var(--line);
+  padding:3px 8px;border-radius:999px}
+
 /* contact */
 .contact-grid{display:grid;gap:40px}
 .contact-copy h3{font-family:var(--font-display);font-size:1.5rem;margin-bottom:12px}
@@ -408,6 +446,26 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 .foot a{color:var(--faint);font-family:var(--font-mono);font-size:.7rem;transition:.2s}
 .foot a:hover{color:var(--amber)}
 
+/* github activity */
+.gh-activity{display:flex;flex-direction:column;gap:24px}
+.gh-stat-row{display:flex;gap:16px;flex-wrap:wrap}
+.gh-stat{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;text-align:center}
+.gh-stat .num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--amber);line-height:1}
+.gh-stat .lbl{font-family:var(--font-mono);font-size:.66rem;color:var(--faint);text-transform:uppercase;
+  letter-spacing:.1em;margin-top:6px}
+.gh-heatmap-wrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.gh-heatmap-label{font-family:var(--font-mono);font-size:.68rem;color:var(--faint);text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:14px}
+.gh-heatmap{display:grid;grid-template-columns:repeat(53,1fr);grid-template-rows:repeat(7,1fr);gap:3px}
+.gh-heatmap .cell{width:100%;aspect-ratio:1;border-radius:2px;background:var(--panel-2);transition:.2s}
+.gh-heatmap .cell.l1{background:rgba(95,212,196,0.15)}
+.gh-heatmap .cell.l2{background:rgba(95,212,196,0.3)}
+.gh-heatmap .cell.l3{background:rgba(95,212,196,0.5)}
+.gh-heatmap .cell.l4{background:rgba(95,212,196,0.75)}
+.gh-heatmap .cell:hover{outline:1px solid var(--amber)}
+.gh-heatmap-empty{font-family:var(--font-mono);font-size:.8rem;color:var(--faint);padding:30px 0;text-align:center}
+
 /* scroll progress */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:500;
   background:linear-gradient(90deg,var(--teal),var(--amber));box-shadow:0 0 12px rgba(95,212,196,0.5)}
@@ -431,6 +489,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   .projects-grid{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:1fr 1fr}
   .t-status{display:none}
+  .t-nav{display:none!important}
+  .t-hamburger{display:flex}
 }
 @media(max-width:720px){
   .eng-tables{grid-template-columns:1fr}
@@ -471,7 +531,19 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       <a href="#contact">Contact</a>
     </nav>
     <div class="t-status"><span class="blink"></span>ONLINE</div>
+    <button class="t-hamburger" id="tHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</div>
+<div class="t-nav-mobile" id="tNavMobile" aria-label="Section navigation">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+  <a href="#projects">Projects</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#contact">Contact</a>
 </div>
 
 <!-- Hero -->
@@ -541,6 +613,42 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <div class="term-hint">robot-lab terminal — type <span style="color:var(--amber)">help</span> + Enter &nbsp;·&nbsp; ↑↓ history &nbsp;·&nbsp; tab autocomplete</div>
         <div class="term-history" id="termHistory"></div>
         <label class="term-input-row" for="termInput"><span class="term-prompt">sam@robot-lab:~$</span><input id="termInput" class="term-input" type="text" autocomplete="off" spellcheck="false" placeholder="type help…" aria-label="Terminal input"></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Now -->
+<section id="now">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index">NOW</span><h2 class="sec-title">Currently Building</h2><div class="sec-line"></div>
+      <span class="sec-meta">ACTIVE</span>
+    </div>
+    <div class="now-grid reveal">
+      <div class="now-card">
+        <div class="now-dot" aria-hidden="true"></div>
+        <div class="now-body">
+          <div class="now-label">UAV Flight-Control Firmware</div>
+          <p>Building real-time control loops for KITE H7 (STM32H7) — dual-IMU sensor fusion, CAN-FD bus, and autonomous navigation across three production drone platforms.</p>
+          <div class="now-tags"><span>STM32H7</span><span>CAN-FD</span><span>Sensor Fusion</span></div>
+        </div>
+      </div>
+      <div class="now-card">
+        <div class="now-dot" aria-hidden="true"></div>
+        <div class="now-body">
+          <div class="now-label">Quadruped Locomotion</div>
+          <p>Prototyping gait controllers and inverse kinematics for a 12-DOF robot dog — testing in ROS2 Gazebo before hardware bring-up.</p>
+          <div class="now-tags"><span>ROS2</span><span>IK</span><span>Gait</span></div>
+        </div>
+      </div>
+      <div class="now-card">
+        <div class="now-dot" aria-hidden="true"></div>
+        <div class="now-body">
+          <div class="now-label">Digital Fabrication Pipeline</div>
+          <p>Setting up end-to-end CAD → slicer → print → finish workflow for rapid prototyping — optimizing for structural parts with tight tolerances.</p>
+          <div class="now-tags"><span>Fusion 360</span><span>FDM</span><span>Post-Processing</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -689,6 +797,23 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <div class="projects-grid" id="projectsGrid">
       <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
       <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GitHub Activity -->
+<section id="github-activity">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-index">04+</span><h2 class="sec-title">GitHub Activity</h2><div class="sec-line"></div>
+      <span class="sec-meta">CONTRIBUTIONS</span>
+    </div>
+    <div class="gh-activity reveal" id="ghActivity">
+      <div class="gh-stat-row" id="ghStats"></div>
+      <div class="gh-heatmap-wrap">
+        <div class="gh-heatmap-label">Contribution activity (last 52 weeks)</div>
+        <div class="gh-heatmap" id="ghHeatmap"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1217,6 +1342,26 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   });
 
   loadRepos();
+
+  /* ---- hamburger menu ---- */
+  var ham=document.getElementById('tHamburger');
+  var mobNav=document.getElementById('tNavMobile');
+  if(ham && mobNav){
+    ham.addEventListener('click',function(){
+      var open=ham.classList.toggle('open');
+      mobNav.classList.toggle('open',open);
+      ham.setAttribute('aria-expanded',open);
+      document.body.style.overflow=open?'hidden':'';
+    });
+    mobNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        ham.classList.remove('open');
+        mobNav.classList.remove('open');
+        ham.setAttribute('aria-expanded','false');
+        document.body.style.overflow='';
+      });
+    });
+  }
 })();</script>
 
 <script>
@@ -1276,6 +1421,95 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     });
     siaGrid.addEventListener('mouseleave', clearSiaHighlight);
   }
-})();</script>
+})();
+
+// ---- GitHub Activity Graph ----
+(function(){
+  var USER='sam-black007';
+  var statsEl=document.getElementById('ghStats');
+  var hmEl=document.getElementById('ghHeatmap');
+  if(!statsEl||!hmEl) return;
+
+  function levelClass(n){
+    if(n===0) return '';
+    if(n<=3) return 'l1';
+    if(n<=6) return 'l2';
+    if(n<=12) return 'l3';
+    return 'l4';
+  }
+
+  function buildHeatmap(counts){
+    var cells=[];
+    var vals=[];
+    for(var i=0;i<371;i++){
+      var c=counts[i]||0;
+      vals.push(c);
+      cells.push('<div class="cell '+levelClass(c)+'" title="'+c+' contributions"></div>');
+    }
+    hmEl.innerHTML=cells.join('');
+    var total=vals.reduce(function(a,b){return a+b;},0);
+    var max=Math.max.apply(null,vals);
+    return {total:total,max:max};
+  }
+
+  async function load(){
+    try{
+      var oneYearAgo=new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear()-1);
+      var page=1;
+      var all=[];
+      while(page<=10){
+        var res=await fetch('https://api.github.com/users/'+USER+'/events/public?per_page=100&page='+page);
+        if(!res.ok) throw new Error('HTTP '+res.status);
+        var data=await res.json();
+        if(!data.length) break;
+        all=all.concat(data);
+        var last=new Date(data[data.length-1].created_at);
+        if(last<oneYearAgo) break;
+        page++;
+      }
+
+      var contribs={};
+      all.forEach(function(e){
+        if(e.type!=='PushEvent'&&e.type!=='CreateEvent'&&e.type!=='IssuesEvent'&&e.type!=='PullRequestEvent'&&e.type!=='ReleaseEvent') return;
+        var d=new Date(e.created_at);
+        if(d<oneYearAgo) return;
+        var key=d.toISOString().slice(0,10);
+        contribs[key]=(contribs[key]||0)+1;
+      });
+
+      var counts=[];
+      var today=new Date();
+      var dayOfWeek=today.getDay();
+      var start=new Date(today);
+      start.setDate(start.getDate()-370);
+      start.setDate(start.getDate()-dayOfWeek);
+
+      for(var i=0;i<371;i++){
+        var d=new Date(start);
+        d.setDate(d.getDate()+i);
+        var key=d.toISOString().slice(0,10);
+        counts.push(contribs[key]||0);
+      }
+
+      var s=buildHeatmap(counts);
+      var repos=0;
+      try{
+        var rRes=await fetch('https://api.github.com/users/'+USER+'?');
+        if(rRes.ok){ var u=await rRes.json(); repos=u.public_repos||0; }
+      }catch(e){}
+
+      statsEl.innerHTML=
+        '<div class="gh-stat"><div class="num">'+s.total+'</div><div class="lbl">Contributions (1 yr)</div></div>'+
+        '<div class="gh-stat"><div class="num">'+s.max+'</div><div class="lbl">Best Day</div></div>'+
+        '<div class="gh-stat"><div class="num">'+repos+'</div><div class="lbl">Public Repos</div></div>';
+
+    }catch(e){
+      hmEl.innerHTML='<div class="gh-heatmap-empty">→ Could not load GitHub activity.</div>';
+    }
+  }
+  load();
+})();
+</script>
 </body>
 </html>
