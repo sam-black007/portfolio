@@ -417,8 +417,29 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 /* toast */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--amber);color:#0B1220;padding:13px 22px;
   border-radius:8px;font-family:var(--font-mono);font-size:.78rem;z-index:400;opacity:0;
-  transform:translateY(20px);transition:.3s var(--ease);max-width:90%}
+  transform:translateY(20px);transition:.3s var(--ease);max-width:90%;box-shadow:0 12px 32px rgba(0,0,0,0.35)}
 .toast.show{opacity:1;transform:none}
+
+/* scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:500;
+  background:linear-gradient(90deg,var(--teal),var(--amber));box-shadow:0 0 12px rgba(95,212,196,0.5)}
+
+/* back to top */
+.totop{position:fixed;bottom:24px;left:24px;z-index:400;width:44px;height:44px;border-radius:10px;
+  display:grid;place-items:center;cursor:pointer;border:1px solid var(--line);background:var(--panel);
+  color:var(--teal);opacity:0;transform:translateY(16px);transition:.3s var(--ease);pointer-events:none}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{border-color:var(--teal);color:var(--amber);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
+
+/* contact success */
+.contact-success{display:none;text-align:center;padding:14px 10px}
+.contact-panel.form-success .contact-form{display:none}
+.contact-panel.form-success .contact-success{display:block}
+.contact-success .cs-title{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--teal);margin-bottom:6px}
+.contact-success .cs-sub{font-size:.9rem;color:var(--muted)}
+.contact-success .cs-icon{width:56px;height:56px;margin:0 auto 14px;border-radius:50%;
+  border:1px solid rgba(95,212,196,0.4);display:grid;place-items:center;color:var(--teal);animation:csPop .5s var(--ease)}
+@keyframes csPop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -747,15 +768,24 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
           <a href="resume.pdf" class="btn btn-ghost" download="Sam_Joseph_CV.pdf">Download CV</a>
         </div>
       </div>
-      <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/samjosephwb@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Portfolio Contact — New Message">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="Tell me about your project…" required></textarea>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
+      <div class="contact-panel reveal">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/samjosephwb@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Portfolio Contact — New Message">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="Tell me about your project…" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div class="contact-success" id="contactSuccess">
+          <div class="cs-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="cs-title">Message sent</div>
+          <div class="cs-sub">Thanks for reaching out — I'll get back to you shortly.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -766,6 +796,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <a href="#" aria-label="Back to top">BACK TO TOP ↑</a>
   </div>
 </footer>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- Case study modal -->
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -1188,11 +1223,55 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   });
   document.getElementById('repoSearch').addEventListener('input',function(e){_search=e.target.value;renderGrid();});
 
-  /* ---- contact toast ---- */
+  /* ---- contact toast + success ---- */
   var form=document.getElementById('contactForm');
   var toast=document.getElementById('toast');
+  var success=document.getElementById('contactSuccess');
+  var panel=form?form.parentNode:null;
   function showToast(m){toast.textContent=m;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},3500);}
-  form.addEventListener('submit',function(){showToast('Transmitting…');});
+  form.addEventListener('submit',function(){
+    if(panel&&panel.classList.contains('form-success')) return;
+    showToast('Transmitting…');
+    if(panel){
+      setTimeout(function(){
+        panel.classList.add('form-success');
+        try{ if(panel.scrollIntoView) panel.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){}
+      },450);
+    }
+  });
+
+  /* ---- scroll progress + back to top ---- */
+  var progress=document.getElementById('scrollProgress');
+  var toTop=document.getElementById('toTop');
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    var pct=max>0?(h.scrollTop||document.body.scrollTop)/max:0;
+    if(progress) progress.style.width=(pct*100)+'%';
+    var past=h.scrollTop>420;
+    if(toTop) toTop.classList.toggle('show',past);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  if(toTop){
+    toTop.addEventListener('click',function(){
+      window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'});
+    });
+  }
+  var footBack=document.querySelector('.foot a[href="#"]');
+  if(footBack){
+    footBack.addEventListener('click',function(e){
+      e.preventDefault();
+      window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'});
+    });
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.target && /^(input|textarea|select)$/i.test(e.target.tagName)) return;
+    var k=(e.key||'').toLowerCase();
+    if(k==='t'){ e.preventDefault(); window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'}); }
+    if(k==='b' && toTop) toTop.focus();
+  });
 
   loadRepos();
 })();</script>
