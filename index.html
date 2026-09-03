@@ -289,14 +289,11 @@ section{padding:62px 0}
 
 /* skills */
 .skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.domain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:28px}
 .skill-group h3{font-family:var(--font-display);font-size:1.02rem;margin-bottom:16px;
   display:flex;align-items:center;gap:10px}
 .skill-group h3::before{content:'';width:14px;height:3px;background:var(--amber);border-radius:2px}
-.skill-chip{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:5px 10px;border-radius:6px;white-space:nowrap;display:inline-block}
-.domain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
-.domain-grid .skill-group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
-.domain-grid .skill-group h3{font-size:.78rem;color:var(--amber);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;display:block}
-.domain-grid .skill-group h3::before{display:none}
+
 .skill{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .skill .lb{width:128px;font-family:var(--font-mono);font-size:.74rem;color:var(--muted)}
 .skill .bar{flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden}
@@ -600,59 +597,39 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     <div class="domain-grid reveal">
       <div class="skill-group">
         <h3>Drones</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">UAV Flight · Mission Planning</span>
-          <span class="skill-chip">Telemetry · Real-time Control</span>
-          <span class="skill-chip">Multi-rotor Platforms</span>
-        </div>
+        <div class="skill"><span class="lb">UAV Flight · Mission Plan</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
+        <div class="skill"><span class="lb">Telemetry · Real-time Ctrl</span><div class="bar"><i data-w="75"></i></div><span class="pc">75%</span></div>
+        <div class="skill"><span class="lb">Multi-rotor Platforms</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
       </div>
       <div class="skill-group">
         <h3>Rover</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">Mobile Robots</span>
-          <span class="skill-chip">Navigation · Path Planning</span>
-          <span class="skill-chip">12-DOF Quadruped</span>
-        </div>
+        <div class="skill"><span class="lb">Mobile Robots</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
+        <div class="skill"><span class="lb">Navigation · Path Planning</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
+        <div class="skill"><span class="lb">12-DOF Quadruped</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
       </div>
       <div class="skill-group">
         <h3>Manufacturing</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">FDM · Resin 3D Printing</span>
-          <span class="skill-chip">CNC · VMC · Laser Cut</span>
-          <span class="skill-chip">Sheet Metal · DFM</span>
-        </div>
+        <div class="skill"><span class="lb">FDM · Resin 3D Printing</span><div class="bar"><i data-w="88"></i></div><span class="pc">88%</span></div>
+        <div class="skill"><span class="lb">CNC · VMC · Laser Cut</span><div class="bar"><i data-w="76"></i></div><span class="pc">76%</span></div>
+        <div class="skill"><span class="lb">Sheet Metal · DFM</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
       </div>
       <div class="skill-group">
         <h3>Machine Operation</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">VMC Setup</span>
-          <span class="skill-chip">CNC Operation</span>
-          <span class="skill-chip">GD&T · Assembly</span>
-        </div>
+        <div class="skill"><span class="lb">VMC Setup</span><div class="bar"><i data-w="70"></i></div><span class="pc">70%</span></div>
+        <div class="skill"><span class="lb">CNC Operation</span><div class="bar"><i data-w="72"></i></div><span class="pc">72%</span></div>
+        <div class="skill"><span class="lb">GD&amp;T · Assembly</span><div class="bar"><i data-w="78"></i></div><span class="pc">78%</span></div>
       </div>
       <div class="skill-group">
         <h3>IoT</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">MQTT / HTTP</span>
-          <span class="skill-chip">IMU · GPS · Ultrasonic · IR</span>
-          <span class="skill-chip">ESP32 · STM32</span>
-        </div>
+        <div class="skill"><span class="lb">MQTT / HTTP</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
+        <div class="skill"><span class="lb">IMU · GPS · Ultrasonic · IR</span><div class="bar"><i data-w="80"></i></div><span class="pc">80%</span></div>
+        <div class="skill"><span class="lb">ESP32 · STM32</span><div class="bar"><i data-w="86"></i></div><span class="pc">86%</span></div>
       </div>
       <div class="skill-group">
         <h3>Testing &amp; Tools</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">NumPy · Proteus</span>
-          <span class="skill-chip">Git · Linux · VS Code</span>
-          <span class="skill-chip">Rapid Prototyping</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Languages</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:5px">
-          <span class="skill-chip">Tamil (Native)</span>
-          <span class="skill-chip">English (Advanced C1)</span>
-          <span class="skill-chip">French · Hindi (A2)</span>
-        </div>
+        <div class="skill"><span class="lb">NumPy · Proteus</span><div class="bar"><i data-w="74"></i></div><span class="pc">74%</span></div>
+        <div class="skill"><span class="lb">Git · Linux · VS Code</span><div class="bar"><i data-w="84"></i></div><span class="pc">84%</span></div>
+        <div class="skill"><span class="lb">Rapid Prototyping</span><div class="bar"><i data-w="82"></i></div><span class="pc">82%</span></div>
       </div>
     </div>
   </div>
