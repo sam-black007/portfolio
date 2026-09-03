@@ -249,19 +249,6 @@ section{padding:62px 0}
 .edu .e-school{font-family:var(--font-mono);font-size:.78rem;color:var(--amber);margin-top:2px}
 .edu .e-note{font-size:.85rem;color:var(--muted);margin-top:8px}
 
-/* builds / hardware */
-.builds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.build{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:22px;position:relative;overflow:hidden;cursor:pointer;transition:.25s var(--ease)}
-.build::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--amber),var(--teal));opacity:.25;transition:.25s}
-.build:hover{transform:translateY(-4px);border-color:rgba(95,212,196,0.4);box-shadow:0 16px 40px rgba(0,0,0,0.4)}
-.build:hover::before{opacity:1}
-.build .b-cat{font-family:var(--font-mono);font-size:.66rem;color:var(--teal);text-transform:uppercase;letter-spacing:.08em}
-.build h3{font-family:var(--font-display);font-size:1.15rem;font-weight:600;margin:8px 0 6px}
-.build p{font-size:.86rem;color:var(--muted);line-height:1.6}
-.build .view{font-family:var(--font-mono);font-size:.68rem;color:var(--amber);margin-top:12px;display:inline-flex;gap:6px;align-items:center}
-
 /* projects */
 .repo-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
 .repo-search{flex:1;min-width:200px;padding:11px 16px;border-radius:8px;border:1px solid var(--line);
@@ -272,11 +259,8 @@ section{padding:62px 0}
   color:var(--muted);font-size:.72rem;font-family:var(--font-mono);cursor:pointer;transition:.2s}
 .filter-chip:hover{border-color:var(--teal);color:var(--teal)}
 .filter-chip.active{background:var(--teal);color:#0B1220;border-color:var(--teal);font-weight:600}
-.tech-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;width:100%}
-.tech-chip{padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:transparent;
-  color:var(--faint);font-size:.66rem;font-family:var(--font-mono);cursor:pointer;transition:.2s}
-.tech-chip:hover{border-color:var(--amber);color:var(--amber)}
-.tech-chip.active{background:var(--amber);color:#0B1220;border-color:var(--amber)}
+.proj-label{font-family:var(--font-mono);font-size:.68rem;color:var(--faint);letter-spacing:.14em;text-transform:uppercase;margin:24px 0 12px;border-top:1px solid var(--line);padding-top:16px}
+.proj-label b{color:var(--amber);font-weight:400}
 
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .project{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -363,13 +347,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 /* responsive */
 @media(max-width:980px){
   .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
-  .projects-grid,.builds-grid{grid-template-columns:1fr 1fr}
+  .projects-grid{grid-template-columns:1fr 1fr}
   .skill-cols{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:1fr 1fr}
   .t-status{display:none}
 }
 @media(max-width:620px){
-  .projects-grid,.builds-grid,.skill-cols,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
+  .projects-grid,.skill-cols,.stats,.ach-list,.edu-grid{grid-template-columns:1fr}
   .wrap,.telemetry-inner,.foot{padding-left:18px;padding-right:18px}
   .t-brand .tag{display:none}
   .mode-row{flex-wrap:wrap}
@@ -399,7 +383,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
-      <a href="#builds">Builds</a>
       <a href="#projects">Projects</a>
       <a href="#achievements">Achievements</a>
       <a href="#contact">Contact</a>
@@ -568,47 +551,11 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   </div>
 </section>
 
-<!-- Builds / Hardware -->
-<section id="builds">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-index">04</span><h2 class="sec-title">Builds / Hardware</h2><div class="sec-line"></div>
-      <span class="sec-meta">PHYSICAL SYSTEMS</span>
-    </div>
-    <div class="builds-grid" id="buildsGrid">
-      <div class="build reveal" onclick="openBuild('zuko-robo-dog')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBuild('zuko-robo-dog')">
-        <div class="b-cat">Quadruped Robot</div>
-        <h3>Zuko — 12-DOF Robo Dog</h3>
-        <p>Autonomous quadruped with inverse-kinematics gait, IMU balance and ROS2 in Docker on Raspberry Pi.</p>
-        <span class="view">OPEN BUILD →</span>
-      </div>
-      <div class="build reveal" onclick="openBuild('smart-agri-rover')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBuild('smart-agri-rover')">
-        <div class="b-cat">Farming Rover</div>
-        <h3>Smart Agri-Rover</h3>
-        <p>Autonomous rover for farm-labour automation — navigation, sensors and controls, built from the ground up.</p>
-        <span class="view">OPEN BUILD →</span>
-      </div>
-      <div class="build reveal" onclick="openBuild('smart-voltage-monitor')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBuild('smart-voltage-monitor')">
-        <div class="b-cat">Protection System</div>
-        <h3>Smart Voltage Monitor</h3>
-        <p>ESP32 voltage monitoring with web dashboard and automatic over/under-voltage protection with auto-disconnect.</p>
-        <span class="view">OPEN BUILD →</span>
-      </div>
-      <div class="build reveal" onclick="openBuild('dual-axis-solar-tracker')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBuild('dual-axis-solar-tracker')">
-        <div class="b-cat">Energy · Embedded</div>
-        <h3>Dual-Axis Solar Tracker</h3>
-        <p>ESP32-driven dual-axis sun tracking with a live web dashboard to maximise solar energy capture.</p>
-        <span class="view">OPEN BUILD →</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Projects -->
 <section id="projects">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index">05</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div>
+      <span class="sec-index">04</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div>
       <span class="sec-meta">LIVE GITHUB</span>
     </div>
     <div class="repo-toolbar reveal">
@@ -620,8 +567,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
         <button class="filter-chip" data-filter="ai">AI/ML</button>
         <button class="filter-chip" data-filter="uav">UAV</button>
       </div>
-      <div class="tech-chips" id="techChips"><span class="tech-chip active" data-s="all">All Tech</span></div>
     </div>
+    <div class="proj-label reveal" id="featuredLabel" style="display:none"><b>Featured</b> — hardware builds &amp; systems</div>
+    <div class="projects-grid" id="featuredGrid"></div>
+    <div class="proj-label reveal" id="otherLabel" style="display:none"><b>Other Projects</b> — remaining work</div>
     <div class="projects-grid" id="projectsGrid">
       <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
       <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
@@ -633,7 +582,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 <section id="achievements">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index">06</span><h2 class="sec-title">Notable Hits</h2><div class="sec-line"></div>
+      <span class="sec-index">05</span><h2 class="sec-title">Notable Hits</h2><div class="sec-line"></div>
       <span class="sec-meta">RECOGNITION</span>
     </div>
     <div class="ach-list">
@@ -661,7 +610,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
 <section id="contact">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-index">07</span><h2 class="sec-title">Open a Channel</h2><div class="sec-line"></div>
+      <span class="sec-index">06</span><h2 class="sec-title">Open a Channel</h2><div class="sec-line"></div>
       <span class="sec-meta">CONTACT</span>
     </div>
     <div class="contact-grid">
@@ -884,12 +833,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
   secs.forEach(function(s){navObs.observe(s);});
 
   /* ---- GitHub projects ---- */
-  var activeFilter='all',activeTech='all',_search='';
+  var activeFilter='all',_search='';
   var flagMap={'smart-helmet-esp32':1,'zuko-robo-dog':1,'multi-dof-manipulator':1,'smart-voltage-monitor':1,'dual-axis-solar-tracker':1};
-  function techFor(r){var t=[];if(r.language)t.push(r.language);var p=projectDescs()[r.name];if(p)t=t.concat(p.stack);
-    var d=(r.description||'').toLowerCase()+' '+r.name.toLowerCase();
-    if(/ros2/.test(d))t.push('ROS2');if(/esp32/.test(d))t.push('ESP32');if(/stm32/.test(d))t.push('STM32');
-    return t;}
   function cat(r){var d=(r.name+' '+(r.description||'')+' '+(r.language||'')).toLowerCase();
     if(/esp32|stm32|arduino|sensor|helmet|voltage|firmware|cctv/.test(d))return 'embedded';
     if(/rob|arm|manip|soccer|dog|quadruped|dof|tracker|solar|rover/.test(d))return 'robotics';
@@ -911,39 +856,52 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
       'studyquality_metrics':{full:'Education analytics tool tracking study-quality metrics to help educators optimise curriculum delivery.',stack:['Python','Analytics','Data Viz','Education']}
     };
   }
-  function renderChips(repos){var set={};
-    repos.forEach(function(r){techFor(r).forEach(function(t){set[t]=1;});});
-    var keys=Object.keys(set).sort();
-    document.getElementById('techChips').innerHTML='<span class="tech-chip active" data-s="all">All Tech</span>'+keys.map(function(k){return '<span class="tech-chip" data-s="'+k+'">'+k+'</span>';}).join('');
-  }
-  function renderGrid(){
-    var grid=document.getElementById('projectsGrid');
-    var list=window._repos||[];
-    if(activeFilter!=='all')list=list.filter(function(r){return cat(r)===activeFilter;});
-    if(activeTech!=='all')list=list.filter(function(r){return techFor(r).indexOf(activeTech)>-1;});
-    if(_search){var q=_search.toLowerCase();list=list.filter(function(r){return (r.name+' '+(r.description||'')).toLowerCase().indexOf(q)>-1;});}
-    if(!list.length){grid.innerHTML='<p style="color:var(--faint);font-family:var(--font-mono);font-size:.8rem">→ No projects match. Try another filter.</p>';return;}
-    grid.innerHTML=list.map(function(r){
-      var p=projectDescs()[r.name];
-      var flag=flagMap[r.name]||flagMap[aliases()[r.name]];
-      return '<div class="project reveal in" onclick="openBuild(\''+resolveKey(r.name)+'\')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')openBuild(\''+resolveKey(r.name)+'\')">'+
-        '<div class="pt"><span class="'+(flag?'flag':'lang')+'">'+(flag?'FEATURED':(r.language||'N/A'))+'</span>'+(flag?('<span class="lang">'+(r.language||'N/A')+'</span>'):'<span style="color:var(--faint);font-family:var(--font-mono);font-size:.64rem">◈</span>')+'</div>'+
-        '<h3>'+r.name.replace(/-/g,' ')+'</h3>'+
-        '<p>'+(p?p.full:(r.description||'Built with dedication and engineering fundamentals.'))+'</p>'+
-        '<div class="meta"><span>'+((p?p.stack:[]).slice(0,3).join(' · ')||r.language)+'</span><span>'+timeAgo(r.pushed_at)+'</span></div>'+
-      '</div>';
-    }).join('');
-  }
+  function isFeatured(name){ return !!flagMap[name] || !!flagMap[aliases()[name]]; }
   function aliases(){return {'4dof-robotic-arm':'smart-agri-rover','multi-dof-manipulator':'smart-agri-rover'};}
   function resolveKey(name){return aliases()[name]||name;}
   function timeAgo(iso){var d=(Date.now()-new Date(iso))/86400000;
     if(d<1)return 'today';if(d<30)return Math.round(d)+'d ago';if(d<365)return Math.round(d/30)+'mo ago';return Math.round(d/365)+'yr ago';}
+  function cardHTML(r){
+    var p=projectDescs()[r.name];
+    var flag=isFeatured(r.name);
+    return '<div class="project reveal in" onclick="openBuild(\''+resolveKey(r.name)+'\')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')openBuild(\''+resolveKey(r.name)+'\')">'+
+      '<div class="pt"><span class="'+(flag?'flag':'lang')+'">'+(flag?'FEATURED':(r.language||'N/A'))+'</span>'+(flag?('<span class="lang">'+(r.language||'N/A')+'</span>'):'<span style="color:var(--faint);font-family:var(--font-mono);font-size:.64rem">◈</span>')+'</div>'+
+      '<h3>'+r.name.replace(/-/g,' ')+'</h3>'+
+      '<p>'+(p?p.full:(r.description||'Built with dedication and engineering fundamentals.'))+'</p>'+
+      '<div class="meta"><span>'+((p?p.stack:[]).slice(0,3).join(' · ')||r.language)+'</span><span>'+timeAgo(r.pushed_at)+'</span></div>'+
+    '</div>';
+  }
+  function renderGrid(){
+    var fg=document.getElementById('featuredGrid');
+    var grid=document.getElementById('projectsGrid');
+    var fl=document.getElementById('featuredLabel');
+    var ol=document.getElementById('otherLabel');
+    var list=window._repos||[];
+    if(activeFilter!=='all')list=list.filter(function(r){return cat(r)===activeFilter;});
+    if(_search){var q=_search.toLowerCase();list=list.filter(function(r){return (r.name+' '+(r.description||'')).toLowerCase().indexOf(q)>-1;});}
+    if(!list.length){
+      if(fg) fg.innerHTML=''; if(fl) fl.style.display='none'; if(ol) ol.style.display='none';
+      grid.innerHTML='<p style="color:var(--faint);font-family:var(--font-mono);font-size:.8rem">→ No projects match. Try another filter.</p>'; return;
+    }
+    var useGrouped = (activeFilter==='all' && !_search);
+    if(useGrouped){
+      var featured=list.filter(function(r){return isFeatured(r.name);});
+      var other=list.filter(function(r){return !isFeatured(r.name);});
+      if(fg) fg.innerHTML=featured.map(cardHTML).join('');
+      grid.innerHTML=other.map(cardHTML).join('');
+      if(fl) fl.style.display= featured.length ? 'block' : 'none';
+      if(ol) ol.style.display= other.length ? 'block' : 'none';
+    } else {
+      if(fg) fg.innerHTML=''; if(fl) fl.style.display='none'; if(ol) ol.style.display='none';
+      grid.innerHTML=list.map(cardHTML).join('');
+    }
+  }
   async function loadRepos(){
     try{
       var res=await fetch('https://api.github.com/users/'+GITHUB_USER+'/repos?per_page=100&sort=pushed&direction=desc');
       var data=await res.json();
       window._repos=data.filter(function(r){return EXCLUDED.indexOf(r.name)<0;});
-      renderChips(window._repos);renderGrid();
+      renderGrid();
     }catch(e){
       document.getElementById('projectsGrid').innerHTML='<p style="color:var(--faint);font-family:var(--font-mono)">→ Could not reach GitHub.</p>';
     }
@@ -981,11 +939,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;margin-top:16px}
     var c=e.target.closest('.filter-chip');if(!c)return;
     document.querySelectorAll('#filterChips .filter-chip').forEach(function(x){x.classList.remove('active');});
     c.classList.add('active');activeFilter=c.dataset.filter;renderGrid();
-  });
-  document.getElementById('techChips').addEventListener('click',function(e){
-    var c=e.target.closest('.tech-chip');if(!c)return;
-    document.querySelectorAll('#techChips .tech-chip').forEach(function(x){x.classList.remove('active');});
-    c.classList.add('active');activeTech=c.dataset.s;renderGrid();
   });
   document.getElementById('repoSearch').addEventListener('input',function(e){_search=e.target.value;renderGrid();});
 
